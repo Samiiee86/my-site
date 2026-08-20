@@ -1,26 +1,307 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================================
+   VOLTARC — DESIGN TOKENS
+   Layer 1: primitives (raw values, never used directly in components)
+   Layer 2: semantic aliases (what components actually consume)
+   ========================================================================= */
+
+@theme {
+  /* --- Layer 1: primitive palette ------------------------------------- */
+
+  /* Neutral ramp — a cold, blue-shifted black. Not pure #000, so that true
+     black can still be used as a shadow and read as "deeper". */
+  --color-ink-950: #04050a;
+  --color-ink-900: #080a11;
+  --color-ink-850: #0b0e16;
+  --color-ink-800: #10131d;
+  --color-ink-700: #171b28;
+  --color-ink-600: #212636;
+  --color-ink-500: #2e3445;
+  --color-ink-400: #454c60;
+  --color-ink-300: #656d84;
+  --color-ink-200: #98a0b4;
+  --color-ink-100: #c8ceda;
+  --color-ink-050: #eef1f6;
+
+  /* Volt — the signature. High-voltage lime, the brand's only loud color. */
+  --color-volt-300: #e6ff8a;
+  --color-volt-400: #d4fb4f;
+  --color-volt-500: #b5ef14;
+  --color-volt-600: #8dc406;
+  --color-volt-700: #5f860a;
+
+  /* Plasma — cool secondary, for cold/electrical readouts. */
+  --color-plasma-400: #6ee7ff;
+  --color-plasma-500: #22cfff;
+  --color-plasma-600: #0aa4d4;
+
+  /* Ember — heat, braking, warnings. Used sparingly. */
+  --color-ember-500: #ff6b3d;
+
+  /* --- Layer 2: semantic surfaces ------------------------------------- */
+  --color-canvas: var(--color-ink-950);
+  --color-surface: var(--color-ink-900);
+  --color-surface-raised: var(--color-ink-800);
+  --color-surface-inset: var(--color-ink-850);
+  --color-hairline: var(--color-ink-600);
+  --color-hairline-soft: var(--color-ink-700);
+
+  /* --- Layer 2: semantic content -------------------------------------- */
+  --color-content: var(--color-ink-050);
+  --color-content-muted: var(--color-ink-200);
+  --color-content-subtle: var(--color-ink-300);
+  --color-content-faint: var(--color-ink-400);
+  --color-accent: var(--color-volt-400);
+  --color-accent-strong: var(--color-volt-500);
+  --color-accent-dim: var(--color-volt-700);
+
+  /* --- Typography ------------------------------------------------------ */
+  --font-display: var(--font-barlow-condensed), "Oswald", ui-sans-serif, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* Display scale — fluid, clamped. Used for hero + section headings. */
+  --text-display-xl: clamp(2.75rem, 6.4vw, 6.25rem);
+  --text-display-xl--line-height: 0.84;
+  --text-display-xl--letter-spacing: -0.035em;
+  --text-display-lg: clamp(2.75rem, 7vw, 5.5rem);
+  --text-display-lg--line-height: 0.9;
+  --text-display-lg--letter-spacing: -0.03em;
+  --text-display-md: clamp(2rem, 4.5vw, 3.25rem);
+  --text-display-md--line-height: 0.95;
+  --text-display-md--letter-spacing: -0.02em;
+
+  /* Data scale — for spec readouts. */
+  --text-metric: clamp(2.5rem, 5.5vw, 4rem);
+  --text-metric--line-height: 0.9;
+  --text-metric--letter-spacing: -0.03em;
+
+  /* Eyebrow / label — small, uppercase, wide-tracked, mono. */
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.22em;
+
+  /* --- Radii ----------------------------------------------------------- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 24px;
+
+  /* --- Motion ---------------------------------------------------------- */
+  /* Two houses: `exit` for things leaving/settling, `entry` for arrivals
+     with a touch of overshoot. Everything on the page uses these. */
+  --ease-entry: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --duration-instant: 120ms;
+  --duration-fast: 240ms;
+  --duration-base: 420ms;
+  --duration-slow: 720ms;
+  --duration-crawl: 1200ms;
+
+  /* --- Elevation & glow ------------------------------------------------ */
+  --shadow-lift: 0 1px 0 0 rgb(255 255 255 / 0.04) inset,
+                 0 24px 48px -24px rgb(0 0 0 / 0.9);
+  --shadow-glow-volt: 0 0 0 1px rgb(212 251 79 / 0.28),
+                      0 0 32px -4px rgb(212 251 79 / 0.35);
+
+  /* --- Layout ---------------------------------------------------------- */
+  --spacing-gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --spacing-section: clamp(5rem, 12vw, 10rem);
+  --container-shell: 88rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ============================================================================
+   BASE
+   ========================================================================= */
 
-@media (prefers-color-scheme: dark) {
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-content);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* The whole page is dark by design — tell the UA so form controls,
+     scrollbars and overscroll gutters match. */
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: dark;
+  }
+
+  ::selection {
+    background-color: var(--color-volt-400);
+    color: var(--color-ink-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-volt-400);
+    outline-offset: 3px;
+    border-radius: var(--radius-xs);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    /* Elements whose opacity or position is driven by Motion carry
+       `data-motion`. Neutralising them here rather than branching on
+       `useReducedMotion()` in the components keeps the server and client
+       renders identical — branching in render diverges at hydration, because
+       the server cannot know the visitor's motion preference. */
+    [data-motion] {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================================
+   UTILITIES
+   ========================================================================= */
+
+/* Small uppercase mono label used above every section heading. */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  line-height: 1;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-content-faint);
+}
+
+/* Page shell: max width + responsive gutters, applied per-section so that
+   full-bleed backgrounds can still escape it. */
+@utility shell {
+  width: 100%;
+  max-width: var(--container-shell);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+/* Hairline rules that fade out at both ends — used as section dividers so
+   they never terminate in a hard, cheap-looking edge. */
+@utility rule-x {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-hairline) 15%,
+    var(--color-hairline) 85%,
+    transparent
+  );
+}
+
+/* Text that fades from full-strength content into the accent. */
+@utility text-gradient-volt {
+  background: linear-gradient(
+    100deg,
+    var(--color-ink-050) 0%,
+    var(--color-ink-050) 30%,
+    var(--color-volt-400) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Faint engineering grid, used behind the hero and gallery. */
+@utility grid-field {
+  background-image: linear-gradient(
+      to right,
+      color-mix(in oklab, var(--color-ink-600) 55%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--color-ink-600) 55%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 72px 72px;
+}
+
+/* ============================================================================
+   KEYFRAMES
+   All are decorative and are neutralised by the reduced-motion block above.
+   ========================================================================= */
+
+@keyframes voltarc-wheel {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Headlight throw breathing in and out. */
+@keyframes voltarc-beam {
+  0%,
+  100% {
+    opacity: 0.05;
+  }
+  50% {
+    opacity: 0.14;
+  }
+}
+
+/* Specular sweep that travels across a surface, left to right. */
+@keyframes voltarc-sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+/* Slow vertical drift for the hero backdrop. */
+@keyframes voltarc-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+/* Scroll-cue pip travelling down its track. */
+@keyframes voltarc-pip {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(22px);
+    opacity: 0;
+  }
+}
+
+/* Continuous ticker. The track holds two identical copies of the content,
+   so translating by exactly -50% loops seamlessly. */
+@keyframes voltarc-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
