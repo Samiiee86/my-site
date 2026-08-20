@@ -103,7 +103,6 @@ export function ArcOne({ className }: { className?: string }) {
 
         {/* Bodywork lit from above, falling into black underneath. */}
         <linearGradient id="body" x1="0.2" y1="0" x2="0.5" y2="1">
-          <stop offset="0%" stopColor="#39425708" />
           <stop offset="0%" stopColor="#394257" />
           <stop offset="42%" stopColor="#1a1f2c" />
           <stop offset="100%" stopColor="#080a11" />
