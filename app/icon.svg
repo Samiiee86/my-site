@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- VOLTARC mark. Drawn heavier than the in-page logo: at 16px in a browser
+       tab a hairline ring disappears, so the stroke and dot are scaled up and
+       the dark plate keeps the lime readable on light tab bars too. -->
+  <rect width="32" height="32" rx="7" fill="#04050a"/>
+  <circle cx="16" cy="16" r="10" fill="none" stroke="#d4fb4f"
+          stroke-width="4" stroke-linecap="round" stroke-dasharray="46 17"/>
+  <circle cx="16" cy="16" r="3.6" fill="#d4fb4f"/>
+</svg>
