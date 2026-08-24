@@ -1,0 +1,235 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist+Pixel&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap");
+
+/* VCR OSD Mono (MrManet, 2015) — free for commercial use. Drives the game's
+   pixel type. */
+@font-face {
+  font-family: "VCR OSD Mono";
+  src: url("/fonts/VCR_OSD_MONO.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+/* Kept as the fallback: the Square cut is not on Google Fonts, only the base. */
+@font-face {
+  font-family: "Geist Pixel Square";
+  src: url("/fonts/GeistPixel-Square.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- tokens: TestMu palette, prompt's structure ---------- */
+:root {
+  --background: 44 20% 95%; /* #F5F4F0 warm cream */
+  --surface: 0 0% 100%;
+  --foreground: 0 0% 7%; /* #121212 */
+  --primary: 0 0% 7%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 45 14% 89%; /* #E7E6DF */
+  --secondary-foreground: 0 0% 7%;
+  --muted: 45 14% 89%;
+  --muted-foreground: 0 0% 30%; /* #4D4D4D */
+  --accent: 226 81% 48%; /* #1742DF TestMu blue */
+  --accent-foreground: 0 0% 100%;
+  --border: 45 8% 81%; /* #D3D2CD */
+  --border-muted: 45 14% 89%;
+  --ring: 226 81% 48%;
+  --radius: 0.5rem;
+
+  --font-display: "Instrument Serif", serif;
+  --font-heading: "Geist Pixel", "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  --shadow-dashboard:
+    0 25px 80px -12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --shadow-card:
+    0 1px 2px rgba(18, 18, 18, 0.04), 0 8px 24px -12px rgba(18, 18, 18, 0.12);
+}
+
+* {
+  font-family: var(--font-body);
+}
+
+.pixel {
+  font-family: var(--font-heading);
+  font-weight: 400;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+h1 *,
+h2 *,
+h3 *,
+h4 *,
+h5 *,
+h6 * {
+  font-family: inherit;
+}
+
+h1 .font-display,
+h2 .font-display,
+h3 .font-display,
+h4 .font-display,
+h5 .font-display,
+h6 .pixel {
+  font-family: var(--font-heading);
+  font-weight: 400;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: hsl(var(--background));
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: hsl(var(--accent) / 0.18);
+  color: hsl(var(--foreground));
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* ---------- entrance ---------- */
+@keyframes heroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.panel-in {
+  animation: panelIn 0.16s ease-out;
+}
+
+.font-mono,
+.mono {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+
+/* ---------- marquee ---------- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* ---------- surfaces ---------- */
+.card {
+  background: hsl(var(--surface));
+  border: 1px solid hsl(var(--border-muted));
+  border-radius: 0;
+}
+
+.blueprint {
+  background-image:
+    linear-gradient(to right, hsl(var(--border) / 0.5) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--border) / 0.5) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.logo-ink {
+  filter: grayscale(1) brightness(0.25);
+  opacity: 0.65;
+  transition: opacity 0.3s ease;
+}
+.logo-ink:hover {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------- pipeline: dashes that march toward the next stage ---------- */
+@keyframes dashMarch {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: 20px;
+  }
+}
+.dash-march {
+  background-image: repeating-linear-gradient(
+    90deg,
+    hsl(var(--border)) 0 8px,
+    transparent 8px 20px
+  );
+  background-size: 20px 1px;
+  background-repeat: repeat-x;
+  animation: dashMarch 1.1s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dash-march {
+    animation: none;
+  }
+}

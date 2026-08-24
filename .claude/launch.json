@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "voltarc-dev",
+      "name": "lithos",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 3000
+      "runtimeArgs": ["run", "dev", "--prefix", "lithos", "--", "--port", "5183", "--strictPort"],
+      "port": 5183
     }
   ]
 }
