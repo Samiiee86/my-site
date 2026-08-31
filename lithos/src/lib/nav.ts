@@ -265,13 +265,13 @@ export const NAV: NavEntry[] = [
         ],
       },
     ],
-    cardsCaption: "Newest agent",
+    cardsCaption: "New product",
     cards: [
       {
-        name: "Kane CLI",
-        desc: "Natural-language E2E flows from your terminal",
+        name: "Introducing Agent Assurance",
+        desc: "Reads your codebase, derives the suite, and grades every criterion against observed evidence.",
         image: "/img/kane-cli-card.png",
-        cta: "Learn more",
+        cta: "Join the waitlist",
       },
     ],
   },
