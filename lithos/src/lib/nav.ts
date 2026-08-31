@@ -293,7 +293,7 @@ export const NAV: NavEntry[] = [
       {
         name: "Introducing Agent Assurance",
         desc: "Multi-agent testing platform of AI agents.",
-        image: "/img/kane-cli-card.png",
+        image: "/img/agent-assurance-card.png",
         cta: "Join the waitlist",
       },
     ],
