@@ -183,9 +183,17 @@ export default function Flow() {
   return (
     <Section>
       <Reveal className="mb-12">
-        <h2 className="text-center text-[32px] leading-[1.14] tracking-tight md:text-[40px]">
-          {platform.title}
-        </h2>
+        <div className="grid gap-6 lg:grid-cols-[1.4fr_0.9fr] lg:items-center lg:gap-14">
+          <h2 className="text-[34px] leading-[1.14] tracking-tight md:text-[42px]">
+            <span className="block text-muted-foreground">One platform,</span>
+            <span className="block">every stage of testing</span>
+          </h2>
+          <p className="max-w-[430px] text-[16px] leading-relaxed text-muted-foreground">
+            Most teams read this left to right — you don&rsquo;t have to. Test
+            Manager can hand its cases straight to HyperExecute. Join at
+            whichever step your team is on.
+          </p>
+        </div>
       </Reveal>
 
       {/* the four stages, connected */}

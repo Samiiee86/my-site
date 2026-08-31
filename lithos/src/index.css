@@ -99,7 +99,9 @@ h6 .pixel {
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Lenis drives the scroll; CSS smooth-behavior would animate every one of
+     its per-frame writes and make the page stutter at each step. */
+  scroll-behavior: auto;
   background: hsl(var(--background));
 }
 

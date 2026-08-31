@@ -80,7 +80,7 @@ export default function Hero() {
       <LoopingVideo />
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-background/70 via-background/40 to-background/80" />
 
-      <div className="relative z-10 flex w-full flex-col items-center px-6">
+      <div className="relative z-10 flex w-full flex-col items-center px-6 pt-[72px]">
         <motion.h1
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

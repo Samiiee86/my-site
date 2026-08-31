@@ -78,7 +78,7 @@ export default function Stories() {
         <div className="overflow-hidden  border border-border-muted bg-surface">
           {/* headline case */}
           <div className="grid lg:grid-cols-[1.35fr_1fr]">
-            <div className="p-8 pr-0 lg:border-r lg:border-border-muted">
+            <div className="p-8 lg:border-r lg:border-border-muted">
               <div
                 data-cursor="Play video"
                 role="button"
@@ -188,7 +188,7 @@ export default function Stories() {
                   alt="Best Egg"
                   className="h-9 w-auto max-w-[157px] object-contain object-left"
                 />
-                <div className="flex flex-wrap items-end justify-between gap-6">
+                <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                   <div>
                     <p className="pixel text-[44px] leading-none tracking-tight text-white">
                       {wide.stat}

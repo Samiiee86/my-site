@@ -115,7 +115,7 @@ export default function Bento() {
           </div>
 
           {/* the four headline products, same cell design as the folds below */}
-          <div className="grid border-t border-border-muted sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid border-t border-border-muted bg-surface sm:grid-cols-2 lg:grid-cols-4">
             {pioneer.cells.map((cell, i) => {
               const Icon = CELL_ICONS[cell.icon as keyof typeof CELL_ICONS];
               return (
