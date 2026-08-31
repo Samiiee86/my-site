@@ -189,7 +189,6 @@ export const NAV: NavEntry[] = [
           { name: "Accessibility DevTools" },
           { name: "Languages & frameworks" },
           { name: "GitHub repositories" },
-          { name: "Status page" },
           { name: "Changelog" },
         ],
       },
