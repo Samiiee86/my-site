@@ -7,7 +7,6 @@ export const nav = {
 };
 
 export const hero = {
-  badge: "Now with Kane AI agents ✦",
   line1: "Build with AI",
   line2: "Test with TestMu AI",
   sub: "The Native AI-Agentic Cloud Platform to Supercharge Quality Engineering. Test Intelligently and Ship Faster.",
@@ -56,73 +55,112 @@ export const pioneer = {
       overlay: `${CDN}testmu-ai/agent/high-performance-overlay.webp`,
     },
   ],
+  /* the four headline products, in the same cell style as the fold sections */
+  cells: [
+    {
+      name: "KaneAI",
+      desc: "World's first end-to-end software testing agent.",
+      icon: "bot",
+    },
+    {
+      name: "Kane CLI",
+      desc: "Natural-language E2E flows from your terminal and CI.",
+      icon: "terminal",
+    },
+    {
+      name: "HyperExecute",
+      desc: "Blazing fast AI-native automation testing cloud.",
+      icon: "zap",
+    },
+    {
+      name: "Real Device Cloud",
+      desc: "Web and mobile testing on 10,000+ real devices.",
+      icon: "smartphone",
+    },
+  ],
 };
 
 export const platform = {
   title: "One Platform for Every Stage of Testing",
-  /* Four steps, and inside each one the products you actually buy, kept
-     visually separate from the features those products include. The order is
-     how teams usually think about testing — not a path anyone is forced to
-     walk. Cases from Test Manager can go straight to HyperExecute; KaneAI can
-     author against a suite that already exists. */
+  /* The Figma workflow diagram, verbatim: four cards, each headed by its
+     step, products named in full with a one-line description, and the
+     supporting capabilities as a checklist. Connectors between cards are
+     drawn by the section, not stored here. */
   stages: [
     {
       key: "PLANNING",
+      icon: "clipboard",
       products: [
-        { name: "Test Manager", desc: "AI-native test case management" },
+        { name: "Test Manager", desc: "Intelligent AI for test management" },
       ],
-      features: ["1-Click Migration", "Jira Linking", "Coverage mapping"],
+      checks: [
+        "1-Click Migration from Other Platforms",
+        "Link Jira Issues with Test Manager",
+      ],
     },
     {
       key: "AUTHORING",
+      icon: "bot",
       products: [
-        { name: "KaneAI", desc: "GenAI-native test authoring agent" },
-        { name: "Kane CLI", desc: "Natural-language E2E flows, run locally" },
+        {
+          name: "Kane AI",
+          desc: "GenAI-native test agent for test planning & authoring",
+        },
+        {
+          name: "Kane CLI",
+          desc: "Browser automation validation for developers, QA & AI coding agents",
+        },
+        {
+          name: "MCP Server",
+          desc: "Connect AI to test data, no manual transfers",
+          highlight: true,
+        },
         {
           name: "Agent Testing",
           desc: "A multi-agentic platform to test AI agents",
         },
       ],
-      features: ["MCP Server", "Self-healing locators", "Framework export"],
+      checks: [],
     },
     {
       key: "EXECUTE",
+      icon: "zap",
       products: [
         {
           name: "HyperExecute",
-          desc: "Blazing fast AI-native automation cloud",
+          desc: "Blazing fast AI-native automation testing cloud",
         },
-        { name: "Real Device Cloud", desc: "Web and mobile on real hardware" },
-        {
-          name: "Cross Browser Testing",
-          desc: "Every browser and version, in parallel",
-        },
-        { name: "Performance Testing", desc: "Browser cloud built for scale" },
       ],
-      features: [
-        "iOS Simulators",
-        "Android Emulators",
+      checks: [
+        "Real Device Cloud",
+        "Automation Testing",
+        "Visual Testing",
+        "API Testing",
+        "Accessibility Testing",
+        "Performance Testing",
+        "iOS Simulators | Android Emulators",
         "Browser Cloud",
-        "Visual & API testing",
       ],
     },
     {
       key: "ANALYSIS",
+      icon: "sparkles",
       products: [
         {
           name: "Test Intelligence",
-          desc: "Dashboards across every run, not one result",
+          desc: "AI-native test intelligence insights",
         },
       ],
-      features: [
-        "Error Classification",
-        "Flakiness Detection",
+      checks: [
+        "AI-powered error classification",
         "Smart auto-healing",
+        "Smart flakiness detection",
       ],
     },
   ],
+  integrations: { label: "120+ Integrations", more: "and more" },
   deployment: {
-    label: "Flexible deployment models on",
+    label: "Flexible Deployment Models on",
     options: ["Shared Cloud", "Private Cloud", "On-Premise"],
   },
 };
@@ -500,7 +538,7 @@ export const folds = [
     id: "author",
     lead: "Plan and Author",
     subject: "every test from plain English",
-    body: "Kane AI turns prompts, tickets, docs and diffs into executable tests. Kane CLI puts the same agent in your terminal and CI, so authoring never leaves your workflow.",
+    body: "Kane AI turns prompts, tickets, docs and diffs into executable tests. Agent Testing puts your own AI agents under the same rigour, across chat, voice and video.",
     cta: "Start free with Google",
     features: [
       {
@@ -511,9 +549,9 @@ export const folds = [
         scene: "clouds",
       },
       {
-        name: "Kane CLI",
-        desc: "Trigger the same agent flows from your terminal, CI pipeline, or coding agent. Runs sync back for replay and reporting.",
-        cta: "Explore Kane CLI",
+        name: "Agent Testing",
+        desc: "A multi-agentic platform to evaluate your AI agents — chat, voice and calling — before they meet a customer.",
+        cta: "Explore Agent Testing",
         panel: shots.projectDoc,
         scene: "sky",
       },
@@ -535,8 +573,8 @@ export const folds = [
         icon: "file",
       },
       {
-        name: "Agent Testing",
-        desc: "Author evaluators for chat, voice and calling agents.",
+        name: "Voice Agent Testing",
+        desc: "Evaluate voice and calling agents end to end.",
         icon: "bot",
       },
     ],

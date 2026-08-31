@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import Dashboard from "./Dashboard";
@@ -8,32 +9,78 @@ const HERO_VIDEO =
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+/* The clip's last frame doesn't match its first, so a native `loop` hard-cuts
+   at the seam. Instead two copies of the video overlap: when the front one is
+   a second from ending, the back one starts from zero and fades up over that
+   second. The cut is still there — it just happens under a crossfade. */
+const FADE = 1; /* seconds */
+
+function LoopingVideo() {
+  const refs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)];
+  const [front, setFront] = useState(0);
+
+  useEffect(() => {
+    let active = 0;
+    let swapping = false;
+
+    const onTime = () => {
+      const v = refs[active].current;
+      if (!v || !v.duration || swapping) return;
+      if (v.duration - v.currentTime <= FADE) {
+        swapping = true;
+        const next = refs[1 - active].current;
+        if (next) {
+          next.currentTime = 0;
+          void next.play();
+        }
+        setFront(1 - active);
+        const old = v;
+        active = 1 - active;
+        window.setTimeout(() => {
+          old.pause();
+          old.currentTime = 0;
+          swapping = false;
+        }, FADE * 1000);
+      }
+    };
+
+    const vids = refs.map((r) => r.current);
+    vids.forEach((v) => v?.addEventListener("timeupdate", onTime));
+    void vids[0]?.play();
+    return () =>
+      vids.forEach((v) => v?.removeEventListener("timeupdate", onTime));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <>
+      {[0, 1].map((i) => (
+        <video
+          key={i}
+          ref={refs[i]}
+          className="absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-1000 ease-linear"
+          style={{ opacity: front === i ? 1 : 0 }}
+          src={HERO_VIDEO}
+          muted
+          playsInline
+          preload="auto"
+          autoPlay={i === 0}
+        />
+      ))}
+    </>
+  );
+}
+
 export default function Hero() {
   return (
     <section
       id="top"
       className="relative flex flex-1 flex-col items-center overflow-hidden"
     >
-      <video
-        className="absolute inset-0 z-0 h-full w-full object-cover"
-        src={HERO_VIDEO}
-        autoPlay
-        muted
-        loop
-        playsInline
-      />
+      <LoopingVideo />
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-background/70 via-background/40 to-background/80" />
 
       <div className="relative z-10 flex w-full flex-col items-center px-6">
-        <motion.span
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="mb-6 inline-flex items-center gap-1.5 rounded-[10px] border border-border bg-background px-4 py-1.5 text-sm text-muted-foreground"
-        >
-          {hero.badge}
-        </motion.span>
-
         <motion.h1
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

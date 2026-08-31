@@ -1,9 +1,59 @@
-import { Play, Quote } from "lucide-react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { Play, Quote, X } from "lucide-react";
 import { storiesGrid } from "../lib/content";
 import { Reveal, Section } from "../lib/ui";
 
+const CUSTOMER_VIDEO = "/video/customer.mp4";
+
+/* Full-screen player. The inline video plays silent on a loop; clicking it
+   opens this popup, which starts from the top with sound and controls. */
+function VideoModal({ onClose }: { onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      onClick={onClose}
+      className="fixed inset-0 z-[120] flex items-center justify-center bg-black/85 p-4 md:p-10"
+    >
+      <button
+        aria-label="Close video"
+        onClick={onClose}
+        className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+      >
+        <X size={18} />
+      </button>
+      <motion.video
+        initial={{ scale: 0.96, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.96, opacity: 0 }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        onClick={(e) => e.stopPropagation()}
+        className="max-h-full w-full max-w-6xl bg-black"
+        src={CUSTOMER_VIDEO}
+        controls
+        autoPlay
+        playsInline
+      />
+    </motion.div>
+  );
+}
+
 export default function Stories() {
   const { hero, wide } = storiesGrid;
+  const [playerOpen, setPlayerOpen] = useState(false);
 
   return (
     <Section>
@@ -31,11 +81,18 @@ export default function Stories() {
             <div className="p-8 pr-0 lg:border-r lg:border-border-muted">
               <div
                 data-cursor="Play video"
-                className="group relative h-[300px] overflow-hidden md:h-[420px]"
+                role="button"
+                tabIndex={0}
+                onClick={() => setPlayerOpen(true)}
+                onKeyDown={(e) => e.key === "Enter" && setPlayerOpen(true)}
+                className="group relative h-[300px] cursor-pointer overflow-hidden md:h-[420px]"
               >
-                <img
-                  src={hero.image}
-                  alt=""
+                <video
+                  src={CUSTOMER_VIDEO}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
                 />
                 <div
@@ -55,10 +112,10 @@ export default function Stories() {
                       {hero.statLabel}
                     </p>
                   </div>
-                  <button className="flex shrink-0 items-center gap-2 rounded-[6px] border border-white bg-white/10 px-4 py-2 text-[13px] font-medium uppercase text-white backdrop-blur-md transition-colors hover:bg-white/20">
+                  <span className="flex shrink-0 items-center gap-2 rounded-[6px] border border-white bg-white/10 px-4 py-2 text-[13px] font-medium uppercase text-white backdrop-blur-md transition-colors group-hover:bg-white/20">
                     <Play size={13} className="fill-white" />
                     {hero.action}
-                  </button>
+                  </span>
                 </div>
               </div>
             </div>
@@ -150,6 +207,9 @@ export default function Stories() {
           </div>
         </div>
       </Reveal>
+      <AnimatePresence>
+        {playerOpen && <VideoModal onClose={() => setPlayerOpen(false)} />}
+      </AnimatePresence>
     </Section>
   );
 }
