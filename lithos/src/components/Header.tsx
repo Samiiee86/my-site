@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { Headset } from "lucide-react";
 import {
   NAV,
   announcement,
   headerActions,
   type Card,
+  type DescItem,
   type GridMenu,
   type Group,
   type PanelMenu,
+  type ProductsMenu,
   type RailBlock,
   type RichItem,
 } from "../lib/nav";
@@ -19,6 +20,9 @@ import {
 const ROW_PLAIN =
   "flex items-center min-h-[34px] px-[9px] -mx-[9px] rounded-[7px] text-[15px] font-medium text-[#121212] whitespace-nowrap overflow-hidden text-ellipsis transition-colors hover:bg-[#F5F4F0]";
 const CAPTION = "text-[15px] font-normal text-[#7F7F7E]";
+/* the artifact pattern: small tracked caps over each column */
+const CAPTION_MONO =
+  "font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-[#7F7F7E]";
 const CLOSE_DELAY = 120;
 
 function RichRow({ item }: { item: RichItem }) {
@@ -175,13 +179,112 @@ function ColumnsPanel({ menu }: { menu: PanelMenu }) {
   );
 }
 
+/* a product row in the new panels: name (+badge), optional one-liner */
+function DescRow({ item }: { item: DescItem }) {
+  return (
+    <a
+      href="#top"
+      className="-mx-[9px] block rounded-[8px] px-[9px] py-[7px] transition-colors hover:bg-[#F5F4F0]"
+    >
+      <span className="flex items-center gap-[7px]">
+        <span className="text-[15px] font-medium leading-5 text-[#121212]">
+          {item.name}
+        </span>
+        {item.badge && (
+          <span className="rounded-[4px] border border-[#1742DF] px-[6px] py-px font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] text-[#1742DF]">
+            {item.badge}
+          </span>
+        )}
+      </span>
+      {item.desc && (
+        <span className="mt-0.5 block whitespace-normal text-[13px] font-normal leading-[18px] text-[#4D4D4D]">
+          {item.desc}
+        </span>
+      )}
+    </a>
+  );
+}
+
+function ProductsPanel({ menu }: { menu: ProductsMenu }) {
+  return (
+    <PanelShell width={menu.width}>
+      <div className="flex gap-12 pb-[24px] pl-7 pr-8 pt-[26px]">
+        {/* Kane, then the agents you build */}
+        <div className="w-[330px] flex-none">
+          <div className={`${CAPTION_MONO} mb-3`}>{menu.kane.caption}</div>
+          <div className="rounded-[10px] border border-[#E7E6DF] bg-[#FAFAF8] px-4 py-3">
+            {menu.kane.items.map((item) => (
+              <DescRow key={item.name} item={item} />
+            ))}
+          </div>
+          <div className="my-5 border-t border-dashed border-[#D3D2CD]" />
+          <div className={`${CAPTION_MONO} mb-2`}>{menu.agentTest.caption}</div>
+          <div className="flex flex-col gap-1">
+            {menu.agentTest.items.map((item) => (
+              <DescRow key={item.name} item={item} />
+            ))}
+          </div>
+        </div>
+
+        <div className="w-[270px] flex-none">
+          <div className={`${CAPTION_MONO} mb-3`}>{menu.cloud.caption}</div>
+          <div className="flex flex-col gap-1">
+            {menu.cloud.items.map((item) => (
+              <DescRow key={item.name} item={item} />
+            ))}
+          </div>
+        </div>
+
+        <div className="w-[250px] flex-none">
+          <div className={`${CAPTION_MONO} mb-3`}>{menu.quality.caption}</div>
+          <div className="flex flex-col gap-1">
+            {menu.quality.items.map((item) => (
+              <DescRow key={item.name} item={item} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Agent Assurance */}
+      <a
+        href="#top"
+        className="group flex items-end justify-between gap-10 border-t border-[#E7E6DF] bg-[#FAFAF8] px-7 pb-[22px] pt-[18px] transition-colors hover:bg-[#F5F4F0]"
+      >
+        <span className="block max-w-[640px]">
+          <span className="flex items-center gap-2.5">
+            <span className={CAPTION_MONO}>{menu.assurance.eyebrow}</span>
+            <span className="rounded-[4px] border border-[#1742DF] px-[6px] py-px font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] text-[#1742DF]">
+              {menu.assurance.chip}
+            </span>
+          </span>
+          <span className="mt-1.5 block text-[18px] font-medium tracking-tight text-[#121212]">
+            {menu.assurance.name}
+          </span>
+          <span className="mt-1 block text-[13px] font-normal leading-[19px] text-[#4D4D4D]">
+            {menu.assurance.body}
+          </span>
+        </span>
+        <span className="flex flex-none items-center gap-1.5 whitespace-nowrap pb-1 text-[15px] font-medium text-[#121212]">
+          {menu.assurance.cta}
+          <span
+            aria-hidden
+            className="transition-transform duration-300 group-hover:translate-x-1"
+          >
+            →
+          </span>
+        </span>
+      </a>
+    </PanelShell>
+  );
+}
+
 function SolutionsPanel({ menu }: { menu: GridMenu }) {
   return (
     <PanelShell width={menu.width}>
-      <div className="flex">
-        <div className="flex-none pb-[22px] pl-7 pr-8 pt-[26px]">
-          <div className={`${CAPTION} mb-1.5`}>What you want to test</div>
-          <div className="grid auto-rows-[34px] grid-cols-[224px_224px] gap-x-8">
+      <div className="flex gap-12 pb-[24px] pl-7 pr-8 pt-[26px]">
+        <div className="flex-none">
+          <div className={`${CAPTION_MONO} mb-3`}>By use case</div>
+          <div className="grid auto-rows-[34px] grid-cols-[218px_218px] gap-x-8 [grid-auto-flow:column] [grid-template-rows:repeat(8,34px)]">
             {menu.useCases.map((useCase) => (
               <a key={useCase} href="#top" className={ROW_PLAIN}>
                 {useCase}
@@ -190,49 +293,40 @@ function SolutionsPanel({ menu }: { menu: GridMenu }) {
           </div>
         </div>
 
-        <div className="grid w-[472px] flex-none content-start grid-cols-[196px_196px] gap-x-8 border-l border-[#E7E6DF] bg-white pb-[22px] pl-8 pr-7 pt-[26px]">
-          <div>
-            <div className={`${CAPTION} mb-1.5`}>Your industry</div>
-            <div className="grid auto-rows-[34px]">
-              {menu.industries.map((industry) => (
-                <a key={industry} href="#top" className={ROW_PLAIN}>
-                  {industry}
-                </a>
-              ))}
-            </div>
+        <div className="w-[248px] flex-none">
+          <div className={`${CAPTION_MONO} mb-3`}>By team size</div>
+          <div className="flex flex-col">
+            {menu.teamSize.map((size) => (
+              <a key={size} href="#top" className={ROW_PLAIN}>
+                {size}
+              </a>
+            ))}
           </div>
-          <div>
-            <div className={`${CAPTION} mb-2.5`}>Who you are</div>
-            <div className="flex flex-col gap-4">
-              {menu.segments.map((segment) => (
-                <a
-                  key={segment.name}
-                  href="#top"
-                  className="block rounded-[7px] px-[9px] py-[6px] -mx-[9px] transition-colors hover:bg-[#F5F4F0]"
-                >
-                  <span className="block text-[15px] font-medium leading-5 text-[#121212]">
-                    {segment.name}
-                  </span>
-                  <span className="mt-px block whitespace-normal text-[13px] font-normal leading-[18px] text-[#4D4D4D]">
-                    {segment.desc}
-                  </span>
-                </a>
-              ))}
-            </div>
+          <a
+            href="#top"
+            className="mt-4 block rounded-[10px] border border-[#E7E6DF] bg-[#FAFAF8] px-4 py-3.5 transition-colors hover:border-[#D3D2CD]"
+          >
+            <span className="block text-[15px] font-medium leading-5 text-[#121212]">
+              {menu.quote.title}
+            </span>
+            <span className="mt-1 block whitespace-normal text-[13px] font-normal leading-[18px] text-[#4D4D4D]">
+              {menu.quote.body}
+            </span>
+            <span className="mt-2.5 inline-flex items-center gap-1.5 text-[14px] font-medium text-[#1742DF]">
+              {menu.quote.cta}
+              <span aria-hidden>→</span>
+            </span>
+          </a>
+        </div>
 
-            <a
-              href="#top"
-              className="mt-7 block rounded-[7px] px-[9px] py-[8px] -mx-[9px] transition-colors hover:bg-[#F5F4F0]"
-            >
-              <span className="flex items-center gap-2 text-[15px] font-medium text-[#121212]">
-                <Headset size={17} strokeWidth={1.6} />
-                {menu.contact.label}
-              </span>
-              <span className="mt-1.5 inline-flex items-center gap-1.5 text-[15px] font-medium text-[#1742DF] transition-colors group-hover:text-[#1433A4]">
-                {menu.contact.cta}
-                <span aria-hidden>→</span>
-              </span>
-            </a>
+        <div className="w-[170px] flex-none">
+          <div className={`${CAPTION_MONO} mb-3`}>Test what AI builds</div>
+          <div className="flex flex-col">
+            {menu.aiBuilds.map((tool) => (
+              <a key={tool} href="#top" className={ROW_PLAIN}>
+                {tool}
+              </a>
+            ))}
           </div>
         </div>
       </div>
@@ -369,6 +463,11 @@ export default function Header() {
           </div>
         </div>
 
+        {active?.kind === "products" && (
+          <div id={`panel-${active.key}`}>
+            <ProductsPanel menu={active} />
+          </div>
+        )}
         {active?.kind === "panel" && (
           <div id={`panel-${active.key}`}>
             <ColumnsPanel menu={active} />
@@ -386,15 +485,33 @@ export default function Header() {
               {NAV.map((item) => {
                 const on = item.kind !== "plain" && section === item.key;
                 const lists: { caption: string; items: string[] }[] = [];
-                if (item.kind === "grid") {
-                  lists.push({ caption: "By use case", items: item.useCases });
+                if (item.kind === "products") {
                   lists.push({
-                    caption: "By industry",
-                    items: item.industries,
+                    caption: item.kane.caption,
+                    items: item.kane.items.map((i) => i.name),
                   });
                   lists.push({
-                    caption: "Who you are",
-                    items: item.segments.map((s) => s.name),
+                    caption: item.agentTest.caption,
+                    items: item.agentTest.items.map((i) => i.name),
+                  });
+                  lists.push({
+                    caption: item.cloud.caption,
+                    items: item.cloud.items.map((i) => i.name),
+                  });
+                  lists.push({
+                    caption: item.quality.caption,
+                    items: item.quality.items.map((i) => i.name),
+                  });
+                  lists.push({
+                    caption: item.assurance.eyebrow,
+                    items: [item.assurance.name],
+                  });
+                } else if (item.kind === "grid") {
+                  lists.push({ caption: "By use case", items: item.useCases });
+                  lists.push({ caption: "By team size", items: item.teamSize });
+                  lists.push({
+                    caption: "Test what AI builds",
+                    items: item.aiBuilds,
                   });
                   lists.push({
                     caption: "Enterprise apps we test",

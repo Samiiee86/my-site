@@ -21,6 +21,27 @@ export type Card = {
   cta?: string;
 };
 
+/* a product row in the new Products panel: name, optional one-liner, badge */
+export type DescItem = { name: string; desc?: string; badge?: string };
+
+export type ProductsMenu = {
+  kind: "products";
+  key: string;
+  label: string;
+  width: number;
+  kane: { caption: string; items: DescItem[] };
+  agentTest: { caption: string; items: DescItem[] };
+  cloud: { caption: string; items: DescItem[] };
+  quality: { caption: string; items: DescItem[] };
+  assurance: {
+    eyebrow: string;
+    chip: string;
+    name: string;
+    body: string;
+    cta: string;
+  };
+};
+
 export type PanelMenu = {
   kind: "panel";
   key: string;
@@ -41,15 +62,15 @@ export type GridMenu = {
   label: string;
   width: number;
   useCases: string[];
-  industries: string[];
-  segments: { name: string; desc: string }[];
-  contact: { label: string; cta: string };
+  teamSize: string[];
+  quote: { title: string; body: string; cta: string };
+  aiBuilds: string[];
   erp: string[];
 };
 
 export type PlainNav = { kind: "plain"; key: string; label: string };
 
-export type NavEntry = PanelMenu | GridMenu | PlainNav;
+export type NavEntry = ProductsMenu | GridMenu | PanelMenu | PlainNav;
 
 export const announcement = {
   text: "TestMu Conf '26 is live — 80+ sessions on air now.",
@@ -65,140 +86,86 @@ export const headerActions = {
 
 export const NAV: NavEntry[] = [
   {
-    kind: "panel",
+    kind: "products",
     key: "products",
     label: "Products",
-    width: 989,
-    cols: "318px 318px",
-    gap: "28px",
-    railWidth: 264,
-    groups: [
-      {
-        caption: "Agent platforms",
-        rich: true,
-        items: [
-          {
-            name: "KaneAI",
-            icon: "/img/products/kaneai.svg",
-            desc: "World's first end-to-end software testing agent",
-          },
-          {
-            name: "Kane CLI",
-            icon: "/img/products/kane-cli.svg",
-            desc: "Natural-language E2E flows, run locally",
-            badge: "New",
-          },
-          {
-            name: "Agent Testing",
-            icon: "/img/products/agent-testing.svg",
-            desc: "Test AI agents across chat, voice and video",
-          },
-          {
-            name: "Test Management",
-            icon: "/img/products/test-management.svg",
-            desc: "AI-native unified test management",
-          },
-          {
-            name: "SmartUI",
-            icon: "/img/products/smartui.svg",
-            desc: "AI-native visual UI testing on cloud",
-          },
-          {
-            name: "Accessibility Testing Agent",
-            icon: "/img/products/accessibility-testing.svg",
-            desc: "Test the accessibility of websites and web apps",
-          },
-        ],
-      },
-      {
-        caption: "Test clouds",
-        rich: true,
-        items: [
-          {
-            name: "Agentic Test Cloud",
-            icon: "/img/products/agentic-test-cloud.svg",
-            desc: "Autonomous end-to-end testing at scale",
-          },
-          {
-            name: "Real Devices Cloud",
-            icon: "/img/products/real-devices-cloud.svg",
-            desc: "Web and mobile on real devices",
-          },
-          {
-            name: "Test Automation Cloud",
-            icon: "/img/products/test-automation-cloud.svg",
-            desc: "Run automation on a scalable grid",
-          },
-          {
-            name: "Native App Automation Cloud",
-            icon: "/img/products/native-app-automation.svg",
-            desc: "End-to-end native app automation",
-          },
-          {
-            name: "HyperExecute",
-            icon: "/img/products/hyperexecute.svg",
-            desc: "Blazing fast AI-native automation cloud",
-          },
-          {
-            name: "Browser Cloud",
-            icon: "/img/products/browser-cloud.svg",
-            desc: "Browser infrastructure for AI agents",
-          },
-        ],
-      },
-    ],
-    rail: [
-      {
-        caption: "Tools & extensions",
-        items: [
-          "MCP Server",
-          "Accessibility DevTools",
-          "Tunnel & local testing",
-          "Browser extensions",
-        ],
-      },
-      {
-        caption: "Set up & connect",
-        items: ["Integrations & plugins", "Browsers & devices supported"],
-      },
-    ],
+    width: 1080,
+    kane: {
+      caption: "AI writes the code · someone has to prove it works",
+      items: [
+        { name: "KaneAI", desc: "The testing agent. Licensed per agent." },
+        {
+          name: "Kane CLI",
+          desc: "Free terminal companion to KaneAI.",
+          badge: "New",
+        },
+      ],
+    },
+    agentTest: {
+      caption: "Test the AI agents you build",
+      items: [
+        { name: "Conversational agents", desc: "Chat, voice and phone" },
+        { name: "Video agents" },
+        { name: "IVR & voice" },
+      ],
+    },
+    cloud: {
+      caption: "Run tests on cloud",
+      items: [
+        { name: "Automation", desc: "Selenium, Cypress and Playwright" },
+        { name: "HyperExecute", desc: "Fastest execution grid" },
+        { name: "Live Testing", desc: "Manual cross-browser sessions" },
+        { name: "Real Device Cloud" },
+        { name: "App Automation" },
+        { name: "Browser Cloud", desc: "Infrastructure for AI agents" },
+      ],
+    },
+    quality: {
+      caption: "Quality and management",
+      items: [
+        { name: "Test Manager", desc: "Cases, runs and coverage" },
+        { name: "SmartUI", desc: "Visual regression testing" },
+        { name: "Accessibility Testing" },
+        { name: "Performance Testing", desc: "JMeter load testing" },
+      ],
+    },
+    assurance: {
+      eyebrow: "New product",
+      chip: "Waitlist",
+      name: "Agent Assurance",
+      body: "For the agents you build — the ones that talk to your customers, and the ones that act on your systems. Reads your codebase, derives the suite, invokes the agent for real and grades every criterion against observed evidence — then publishes what it could not verify.",
+      cta: "Explore the platform",
+    },
   },
   {
     kind: "grid",
     key: "solutions",
     label: "Solutions",
-    width: 1012,
+    width: 1080,
     useCases: [
       "Cross browser testing",
-      "Responsive testing",
       "Mobile app testing",
-      "Performance testing",
-      "Geo-location testing",
+      "Web application testing",
+      "Responsive testing",
       "API testing",
-      "Local page testing",
-      "Test case management",
-      "Accessibility testing",
-      "Visual regression testing",
-      "IVR & voice testing",
-      "Low code testing",
-      "End-to-end flow automation",
-      "Continuous testing",
+      "Functional testing",
       "Regression testing",
-      "Mobile web testing",
+      "Automated UI testing",
+      "Continuous testing",
+      "Shift left testing",
+      "Codeless testing",
+      "Low code testing",
+      "Geolocation testing",
+      "Localization testing",
+      "Local page testing",
     ],
-    industries: [
-      "Retail & e-commerce",
-      "Financial services",
-      "Healthcare",
-      "Media & entertainment",
-      "Travel & hospitality",
-      "Insurance",
-    ],
-    segments: [
-      { name: "Enterprise", desc: "Governance, SSO and scale" },
-      { name: "Professional services", desc: "We migrate your suite" },
-    ],
-    contact: { label: "Get a Quote?", cta: "Contact Our Experts" },
+    teamSize: ["Startups", "Growing teams", "Enterprise", "Public sector"],
+    quote: {
+      title: "Not sure which plan?",
+      body: "Tell us your team size and stack — we will scope it with you.",
+      cta: "Get a quote",
+    },
+    aiBuilds: ["Vibe coding", "Lovable", "Bolt", "v0", "Cursor", "Replit"],
     erp: [
       "Salesforce",
       "SAP",
@@ -208,48 +175,6 @@ export const NAV: NavEntry[] = [
       "NetSuite",
       "Dynamics 365",
       "Coupa",
-    ],
-  },
-  {
-    kind: "panel",
-    key: "agents",
-    label: "AI Agents",
-    width: 765,
-    cols: "224px 224px",
-    gap: "28px",
-    railWidth: 216,
-    groups: [
-      {
-        caption: "Automate with agents",
-        items: [
-          { name: "AI agent testing" },
-          { name: "AI test authoring" },
-          { name: "AI visual testing" },
-          { name: "AI test planning" },
-          { name: "AI root cause analysis" },
-          { name: "AI accessibility testing" },
-        ],
-      },
-      {
-        caption: "Agent operations",
-        items: [
-          { name: "AI test orchestration" },
-          { name: "AI test insights" },
-          { name: "AI flaky test detection" },
-          { name: "AI regression analysis" },
-          { name: "AI coverage analysis" },
-          { name: "AI performance analysis" },
-        ],
-      },
-    ],
-    cardsCaption: "Newest agent",
-    cards: [
-      {
-        name: "Kane CLI",
-        desc: "Natural-language E2E flows from your terminal",
-        image: "/img/kane-cli-card.png",
-        cta: "Learn more",
-      },
     ],
   },
   {
@@ -303,6 +228,48 @@ export const NAV: NavEntry[] = [
           "Live webinars this week",
           "Open QA job board",
         ],
+      },
+    ],
+  },
+  {
+    kind: "panel",
+    key: "agents",
+    label: "AI Agents",
+    width: 765,
+    cols: "224px 224px",
+    gap: "28px",
+    railWidth: 216,
+    groups: [
+      {
+        caption: "Automate with agents",
+        items: [
+          { name: "AI agent testing" },
+          { name: "AI test authoring" },
+          { name: "AI visual testing" },
+          { name: "AI test planning" },
+          { name: "AI root cause analysis" },
+          { name: "AI accessibility testing" },
+        ],
+      },
+      {
+        caption: "Agent operations",
+        items: [
+          { name: "AI test orchestration" },
+          { name: "AI test insights" },
+          { name: "AI flaky test detection" },
+          { name: "AI regression analysis" },
+          { name: "AI coverage analysis" },
+          { name: "AI performance analysis" },
+        ],
+      },
+    ],
+    cardsCaption: "Newest agent",
+    cards: [
+      {
+        name: "Kane CLI",
+        desc: "Natural-language E2E flows from your terminal",
+        image: "/img/kane-cli-card.png",
+        cta: "Learn more",
       },
     ],
   },
