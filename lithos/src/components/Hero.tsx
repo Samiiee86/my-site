@@ -82,7 +82,9 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-background/70 via-background/30 to-transparent" />
       {/* ...and a dissolve into the page background below, so the video never
           hard-stops against the next section */}
-      <div className="absolute inset-x-0 bottom-0 z-0 h-[45%] bg-gradient-to-b from-transparent via-background/60 to-background" />
+      <div className="absolute inset-x-0 bottom-0 z-0 h-[45%] bg-gradient-to-b from-transparent via-background/80 to-background" />
+      {/* the last stretch is solid, so the video is fully gone at the divider */}
+      <div className="absolute inset-x-0 bottom-0 z-0 h-[7%] bg-background" />
 
       <div className="relative z-10 flex w-full flex-col items-center px-6 pt-[72px]">
         <motion.h1
