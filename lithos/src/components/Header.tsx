@@ -112,7 +112,7 @@ function Rail({
                 <img
                   src={card.image}
                   alt=""
-                  className="aspect-[4/3] w-full bg-[#F5F4F0] object-cover"
+                  className="aspect-[4/3] w-[192px] bg-[#F5F4F0] object-cover"
                   loading="lazy"
                 />
                 <span className="min-w-0">
@@ -224,34 +224,6 @@ function ProductsPanel({ menu }: { menu: ProductsMenu }) {
               <DescRow key={item.name} item={item} />
             ))}
           </div>
-
-          {/* the promo sits at the foot of the column, the way ElevenLabs
-              introduces Music v2 — thumb, title, two grey lines, a link */}
-          <a href="#top" className="group mt-9 block">
-            <span className="flex h-11 w-11 items-center justify-center bg-[#121212] font-mono text-[12px] font-medium tracking-[0.06em] text-white">
-              AA
-            </span>
-            <span className="mt-3 flex flex-wrap items-center gap-2">
-              <span className="text-[15px] font-medium leading-5 text-[#121212]">
-                {menu.assurance.name}
-              </span>
-              <span className="border border-[#1742DF] px-[6px] py-px font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] text-[#1742DF]">
-                {menu.assurance.chip}
-              </span>
-            </span>
-            <span className="mt-1 block max-w-[300px] whitespace-normal text-[13px] font-normal leading-[19px] text-[#4D4D4D]">
-              {menu.assurance.body}
-            </span>
-            <span className="mt-2 inline-flex items-center gap-1.5 text-[14px] font-medium text-[#1742DF]">
-              {menu.assurance.cta}
-              <span
-                aria-hidden
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              >
-                →
-              </span>
-            </span>
-          </a>
         </div>
 
         <div className="w-[270px] flex-none">
@@ -496,10 +468,6 @@ export default function Header() {
                   lists.push({
                     caption: item.quality.caption,
                     items: item.quality.items.map((i) => i.name),
-                  });
-                  lists.push({
-                    caption: item.assurance.eyebrow,
-                    items: [item.assurance.name],
                   });
                 } else if (item.kind === "grid") {
                   lists.push({ caption: "By use case", items: item.useCases });

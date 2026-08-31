@@ -33,13 +33,6 @@ export type ProductsMenu = {
   agentTest: { caption: string; items: DescItem[] };
   cloud: { caption: string; items: DescItem[] };
   quality: { caption: string; items: DescItem[] };
-  assurance: {
-    eyebrow: string;
-    chip: string;
-    name: string;
-    body: string;
-    cta: string;
-  };
 };
 
 export type PanelMenu = {
@@ -107,6 +100,11 @@ export const NAV: NavEntry[] = [
         { name: "Conversational agents", desc: "Chat, voice and phone" },
         { name: "Video agents", desc: "Screen-share and video sessions" },
         { name: "IVR & voice", desc: "Phone trees and voice journeys" },
+        {
+          name: "Agent Assurance",
+          desc: "Grades every criterion against observed evidence",
+          badge: "Waitlist",
+        },
       ],
     },
     cloud: {
@@ -128,13 +126,6 @@ export const NAV: NavEntry[] = [
         { name: "Accessibility Testing", desc: "WCAG audits, automated" },
         { name: "Performance Testing", desc: "JMeter load testing" },
       ],
-    },
-    assurance: {
-      eyebrow: "New product",
-      chip: "Waitlist",
-      name: "Introducing Agent Assurance",
-      body: "Reads your codebase, derives the suite, and grades every criterion against observed evidence.",
-      cta: "Join the waitlist",
     },
   },
   {
@@ -237,10 +228,10 @@ export const NAV: NavEntry[] = [
     kind: "panel",
     key: "agents",
     label: "AI Agents",
-    width: 765,
+    width: 925,
     cols: "224px 224px",
     gap: "28px",
-    railWidth: 216,
+    railWidth: 376,
     groups: [
       {
         caption: "Automate with agents",
