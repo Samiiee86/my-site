@@ -63,7 +63,7 @@ export type GridMenu = {
   width: number;
   useCases: string[];
   teamSize: string[];
-  quote: { title: string; body: string; cta: string };
+  quote: { title: string; cta: string };
   aiBuilds: string[];
   erp: string[];
 };
@@ -91,7 +91,7 @@ export const NAV: NavEntry[] = [
     label: "Products",
     width: 1080,
     kane: {
-      caption: "AI writes the code · someone has to prove it works",
+      caption: "AI writes it. Kane proves it.",
       items: [
         { name: "KaneAI", desc: "The testing agent. Licensed per agent." },
         {
@@ -105,8 +105,8 @@ export const NAV: NavEntry[] = [
       caption: "Test the AI agents you build",
       items: [
         { name: "Conversational agents", desc: "Chat, voice and phone" },
-        { name: "Video agents" },
-        { name: "IVR & voice" },
+        { name: "Video agents", desc: "Screen-share and video sessions" },
+        { name: "IVR & voice", desc: "Phone trees and voice journeys" },
       ],
     },
     cloud: {
@@ -115,8 +115,8 @@ export const NAV: NavEntry[] = [
         { name: "Automation", desc: "Selenium, Cypress and Playwright" },
         { name: "HyperExecute", desc: "Fastest execution grid" },
         { name: "Live Testing", desc: "Manual cross-browser sessions" },
-        { name: "Real Device Cloud" },
-        { name: "App Automation" },
+        { name: "Real Device Cloud", desc: "Web and mobile on real devices" },
+        { name: "App Automation", desc: "Native iOS and Android automation" },
         { name: "Browser Cloud", desc: "Infrastructure for AI agents" },
       ],
     },
@@ -125,16 +125,16 @@ export const NAV: NavEntry[] = [
       items: [
         { name: "Test Manager", desc: "Cases, runs and coverage" },
         { name: "SmartUI", desc: "Visual regression testing" },
-        { name: "Accessibility Testing" },
+        { name: "Accessibility Testing", desc: "WCAG audits, automated" },
         { name: "Performance Testing", desc: "JMeter load testing" },
       ],
     },
     assurance: {
       eyebrow: "New product",
       chip: "Waitlist",
-      name: "Agent Assurance",
-      body: "For the agents you build — the ones that talk to your customers, and the ones that act on your systems. Reads your codebase, derives the suite, invokes the agent for real and grades every criterion against observed evidence — then publishes what it could not verify.",
-      cta: "Explore the platform",
+      name: "Introducing Agent Assurance",
+      body: "Reads your codebase, derives the suite, and grades every criterion against observed evidence.",
+      cta: "Join the waitlist",
     },
   },
   {
@@ -159,12 +159,14 @@ export const NAV: NavEntry[] = [
       "Localization testing",
       "Local page testing",
     ],
-    teamSize: ["Startups", "Growing teams", "Enterprise", "Public sector"],
-    quote: {
-      title: "Not sure which plan?",
-      body: "Tell us your team size and stack — we will scope it with you.",
-      cta: "Get a quote",
-    },
+    teamSize: [
+      "Startups",
+      "Growing teams",
+      "Enterprise",
+      "Public sector",
+      "Professional services",
+    ],
+    quote: { title: "Not sure which plan?", cta: "Get a quote" },
     aiBuilds: ["Vibe coding", "Lovable", "Bolt", "v0", "Cursor", "Replit"],
     erp: [
       "Salesforce",

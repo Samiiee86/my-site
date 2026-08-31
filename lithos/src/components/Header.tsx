@@ -18,7 +18,7 @@ import {
    shifts the page. Every panel is exactly as wide as its own contents. */
 
 const ROW_PLAIN =
-  "flex items-center min-h-[34px] px-[9px] -mx-[9px] rounded-[7px] text-[15px] font-medium text-[#121212] whitespace-nowrap overflow-hidden text-ellipsis transition-colors hover:bg-[#F5F4F0]";
+  "flex items-center min-h-[34px] px-[9px] -mx-[9px] text-[15px] font-medium text-[#121212] whitespace-nowrap overflow-hidden text-ellipsis transition-colors hover:bg-[#F5F4F0]";
 const CAPTION = "text-[15px] font-normal text-[#7F7F7E]";
 /* the artifact pattern: small tracked caps over each column */
 const CAPTION_MONO =
@@ -29,7 +29,7 @@ function RichRow({ item }: { item: RichItem }) {
   return (
     <a
       href="#top"
-      className="flex items-start gap-[11px] rounded-[8px] px-[9px] py-[7px] -mx-[9px] transition-colors hover:bg-[#F5F4F0]"
+      className="flex items-start gap-[11px] px-[9px] py-[7px] -mx-[9px] transition-colors hover:bg-[#F5F4F0]"
     >
       <img
         src={item.icon}
@@ -44,7 +44,7 @@ function RichRow({ item }: { item: RichItem }) {
             {item.name}
           </span>
           {item.badge && (
-            <span className="rounded-full bg-[#EEF2FF] px-2 py-px text-[12px] font-medium tracking-[0.02em] text-[#1742DF]">
+            <span className="bg-[#EEF2FF] px-2 py-px text-[12px] font-medium tracking-[0.02em] text-[#1742DF]">
               {item.badge}
             </span>
           )}
@@ -112,7 +112,7 @@ function Rail({
                 <img
                   src={card.image}
                   alt=""
-                  className="aspect-[4/3] w-full rounded-[8px] bg-[#F5F4F0] object-cover"
+                  className="aspect-[4/3] w-full bg-[#F5F4F0] object-cover"
                   loading="lazy"
                 />
                 <span className="min-w-0">
@@ -148,7 +148,7 @@ function PanelShell({
     <div className="absolute inset-x-0 top-full flex justify-center px-7 pt-1.5">
       <div
         style={{ width: "100%", maxWidth: width }}
-        className="panel-in overflow-hidden rounded-[14px] border border-[#E7E6DF] bg-white shadow-[0_24px_60px_rgba(18,18,18,0.14)]"
+        className="panel-in overflow-hidden border border-[#E7E6DF] bg-white shadow-[0_24px_60px_rgba(18,18,18,0.14)]"
       >
         {children}
       </div>
@@ -184,14 +184,14 @@ function DescRow({ item }: { item: DescItem }) {
   return (
     <a
       href="#top"
-      className="-mx-[9px] block rounded-[8px] px-[9px] py-[7px] transition-colors hover:bg-[#F5F4F0]"
+      className="-mx-[9px] block px-[9px] py-[7px] transition-colors hover:bg-[#F5F4F0]"
     >
       <span className="flex items-center gap-[7px]">
         <span className="text-[15px] font-medium leading-5 text-[#121212]">
           {item.name}
         </span>
         {item.badge && (
-          <span className="rounded-[4px] border border-[#1742DF] px-[6px] py-px font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] text-[#1742DF]">
+          <span className="border border-[#1742DF] px-[6px] py-px font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] text-[#1742DF]">
             {item.badge}
           </span>
         )}
@@ -211,8 +211,8 @@ function ProductsPanel({ menu }: { menu: ProductsMenu }) {
       <div className="flex gap-12 pb-[24px] pl-7 pr-8 pt-[26px]">
         {/* Kane, then the agents you build */}
         <div className="w-[330px] flex-none">
-          <div className={`${CAPTION_MONO} mb-3`}>{menu.kane.caption}</div>
-          <div className="rounded-[10px] border border-[#E7E6DF] bg-[#FAFAF8] px-4 py-3">
+          <div className={`${CAPTION_MONO} mb-2`}>{menu.kane.caption}</div>
+          <div className="flex flex-col gap-1">
             {menu.kane.items.map((item) => (
               <DescRow key={item.name} item={item} />
             ))}
@@ -224,6 +224,34 @@ function ProductsPanel({ menu }: { menu: ProductsMenu }) {
               <DescRow key={item.name} item={item} />
             ))}
           </div>
+
+          {/* the promo sits at the foot of the column, the way ElevenLabs
+              introduces Music v2 — thumb, title, two grey lines, a link */}
+          <a href="#top" className="group mt-9 block">
+            <span className="flex h-11 w-11 items-center justify-center bg-[#121212] font-mono text-[12px] font-medium tracking-[0.06em] text-white">
+              AA
+            </span>
+            <span className="mt-3 flex flex-wrap items-center gap-2">
+              <span className="text-[15px] font-medium leading-5 text-[#121212]">
+                {menu.assurance.name}
+              </span>
+              <span className="border border-[#1742DF] px-[6px] py-px font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] text-[#1742DF]">
+                {menu.assurance.chip}
+              </span>
+            </span>
+            <span className="mt-1 block max-w-[300px] whitespace-normal text-[13px] font-normal leading-[19px] text-[#4D4D4D]">
+              {menu.assurance.body}
+            </span>
+            <span className="mt-2 inline-flex items-center gap-1.5 text-[14px] font-medium text-[#1742DF]">
+              {menu.assurance.cta}
+              <span
+                aria-hidden
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </span>
+          </a>
         </div>
 
         <div className="w-[270px] flex-none">
@@ -244,36 +272,6 @@ function ProductsPanel({ menu }: { menu: ProductsMenu }) {
           </div>
         </div>
       </div>
-
-      {/* Agent Assurance */}
-      <a
-        href="#top"
-        className="group flex items-end justify-between gap-10 border-t border-[#E7E6DF] bg-[#FAFAF8] px-7 pb-[22px] pt-[18px] transition-colors hover:bg-[#F5F4F0]"
-      >
-        <span className="block max-w-[640px]">
-          <span className="flex items-center gap-2.5">
-            <span className={CAPTION_MONO}>{menu.assurance.eyebrow}</span>
-            <span className="rounded-[4px] border border-[#1742DF] px-[6px] py-px font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] text-[#1742DF]">
-              {menu.assurance.chip}
-            </span>
-          </span>
-          <span className="mt-1.5 block text-[18px] font-medium tracking-tight text-[#121212]">
-            {menu.assurance.name}
-          </span>
-          <span className="mt-1 block text-[13px] font-normal leading-[19px] text-[#4D4D4D]">
-            {menu.assurance.body}
-          </span>
-        </span>
-        <span className="flex flex-none items-center gap-1.5 whitespace-nowrap pb-1 text-[15px] font-medium text-[#121212]">
-          {menu.assurance.cta}
-          <span
-            aria-hidden
-            className="transition-transform duration-300 group-hover:translate-x-1"
-          >
-            →
-          </span>
-        </span>
-      </a>
     </PanelShell>
   );
 }
@@ -302,21 +300,18 @@ function SolutionsPanel({ menu }: { menu: GridMenu }) {
               </a>
             ))}
           </div>
-          <a
-            href="#top"
-            className="mt-4 block rounded-[10px] border border-[#E7E6DF] bg-[#FAFAF8] px-4 py-3.5 transition-colors hover:border-[#D3D2CD]"
-          >
+          <div className="mt-6">
             <span className="block text-[15px] font-medium leading-5 text-[#121212]">
               {menu.quote.title}
             </span>
-            <span className="mt-1 block whitespace-normal text-[13px] font-normal leading-[18px] text-[#4D4D4D]">
-              {menu.quote.body}
-            </span>
-            <span className="mt-2.5 inline-flex items-center gap-1.5 text-[14px] font-medium text-[#1742DF]">
+            <a
+              href="#top"
+              className="mt-1.5 inline-flex items-center gap-1.5 text-[14px] font-medium text-[#1742DF] transition-colors hover:text-[#1433A4]"
+            >
               {menu.quote.cta}
               <span aria-hidden>→</span>
-            </span>
-          </a>
+            </a>
+          </div>
         </div>
 
         <div className="w-[170px] flex-none">
@@ -338,7 +333,7 @@ function SolutionsPanel({ menu }: { menu: GridMenu }) {
             <a
               key={app}
               href="#top"
-              className="flex-none whitespace-nowrap rounded-full border border-[#E7E6DF] bg-[#FAFAF8] px-[11px] py-1 text-[13px] font-medium leading-[18px] text-[#121212] transition-colors hover:border-[#121212]"
+              className="flex-none whitespace-nowrap border border-[#E7E6DF] bg-[#FAFAF8] px-[11px] py-1 text-[13px] font-medium leading-[18px] text-[#121212] transition-colors hover:border-[#121212]"
             >
               {app}
             </a>
