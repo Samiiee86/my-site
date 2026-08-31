@@ -231,10 +231,10 @@ export const NAV: NavEntry[] = [
     kind: "panel",
     key: "agents",
     label: "AI Agents",
-    width: 945,
+    width: 869,
     cols: "224px 224px",
     gap: "48px",
-    railWidth: 376,
+    railWidth: 300,
     groups: [
       {
         caption: "Automate with agents",
@@ -263,7 +263,7 @@ export const NAV: NavEntry[] = [
     cards: [
       {
         name: "Introducing Agent Assurance",
-        desc: "Reads your codebase, derives the suite, and grades every criterion against observed evidence.",
+        desc: "Derives your suite and grades it against observed evidence.",
         image: "/img/kane-cli-card.png",
         cta: "Join the waitlist",
       },

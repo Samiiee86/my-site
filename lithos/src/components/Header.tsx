@@ -19,7 +19,6 @@ import {
 
 const ROW_PLAIN =
   "flex items-center min-h-[34px] px-[9px] -mx-[9px] text-[15px] font-medium text-[#121212] whitespace-nowrap overflow-hidden text-ellipsis transition-colors hover:bg-[#F5F4F0]";
-const CAPTION = "text-[15px] font-normal text-[#7F7F7E]";
 /* the artifact pattern: small tracked caps over each column */
 const CAPTION_MONO =
   "font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-[#7F7F7E]";
@@ -60,7 +59,7 @@ function RichRow({ item }: { item: RichItem }) {
 function GroupColumn({ group }: { group: Group }) {
   return (
     <div>
-      <div className={`${CAPTION} mb-1.5`}>{group.caption}</div>
+      <div className={`${CAPTION_MONO} mb-2`}>{group.caption}</div>
       <div className="flex flex-col">
         {group.rich
           ? group.items.map((item) => <RichRow key={item.name} item={item} />)
@@ -92,7 +91,7 @@ function Rail({
     >
       {blocks?.map((block) => (
         <div key={block.caption}>
-          <div className={`${CAPTION} mb-1.5`}>{block.caption}</div>
+          <div className={`${CAPTION_MONO} mb-2`}>{block.caption}</div>
           <div className="flex flex-col">
             {block.items.map((item) => (
               <a key={item} href="#top" className={ROW_PLAIN}>
@@ -105,7 +104,7 @@ function Rail({
 
       {cards && cards.length > 0 && (
         <div>
-          <div className={`${CAPTION} mb-2.5`}>{cardsCaption}</div>
+          <div className={`${CAPTION_MONO} mb-2`}>{cardsCaption}</div>
           <div className="flex flex-col gap-[14px]">
             {cards.map((card) => (
               <a key={card.name} href="#top" className="flex flex-col gap-2.5">
@@ -227,7 +226,7 @@ function ProductsPanel({ menu }: { menu: ProductsMenu }) {
         </div>
 
         <div className="w-[270px] flex-none">
-          <div className={`${CAPTION_MONO} mb-3`}>{menu.cloud.caption}</div>
+          <div className={`${CAPTION_MONO} mb-2`}>{menu.cloud.caption}</div>
           <div className="flex flex-col gap-1">
             {menu.cloud.items.map((item) => (
               <DescRow key={item.name} item={item} />
@@ -236,7 +235,7 @@ function ProductsPanel({ menu }: { menu: ProductsMenu }) {
         </div>
 
         <div className="w-[250px] flex-none">
-          <div className={`${CAPTION_MONO} mb-3`}>{menu.quality.caption}</div>
+          <div className={`${CAPTION_MONO} mb-2`}>{menu.quality.caption}</div>
           <div className="flex flex-col gap-1">
             {menu.quality.items.map((item) => (
               <DescRow key={item.name} item={item} />
@@ -253,7 +252,7 @@ function SolutionsPanel({ menu }: { menu: GridMenu }) {
     <PanelShell width={menu.width}>
       <div className="flex gap-12 pb-[24px] pl-7 pr-8 pt-[26px]">
         <div className="flex-none">
-          <div className={`${CAPTION_MONO} mb-3`}>By use case</div>
+          <div className={`${CAPTION_MONO} mb-2`}>By use case</div>
           <div className="grid auto-rows-[34px] grid-cols-[218px_218px] gap-x-8 [grid-auto-flow:column] [grid-template-rows:repeat(8,34px)]">
             {menu.useCases.map((useCase) => (
               <a key={useCase} href="#top" className={ROW_PLAIN}>
@@ -264,7 +263,7 @@ function SolutionsPanel({ menu }: { menu: GridMenu }) {
         </div>
 
         <div className="w-[248px] flex-none">
-          <div className={`${CAPTION_MONO} mb-3`}>By team size</div>
+          <div className={`${CAPTION_MONO} mb-2`}>By team size</div>
           <div className="flex flex-col">
             {menu.teamSize.map((size) => (
               <a key={size} href="#top" className={ROW_PLAIN}>
@@ -287,7 +286,7 @@ function SolutionsPanel({ menu }: { menu: GridMenu }) {
         </div>
 
         <div className="w-[170px] flex-none">
-          <div className={`${CAPTION_MONO} mb-3`}>Test what AI builds</div>
+          <div className={`${CAPTION_MONO} mb-2`}>Test what AI builds</div>
           <div className="flex flex-col">
             {menu.aiBuilds.map((tool) => (
               <a key={tool} href="#top" className={ROW_PLAIN}>
@@ -299,7 +298,7 @@ function SolutionsPanel({ menu }: { menu: GridMenu }) {
       </div>
 
       <div className="border-t border-[#E7E6DF] px-7 pb-[22px] pt-[18px]">
-        <div className={`${CAPTION} mb-2.5`}>Enterprise apps we test</div>
+        <div className={`${CAPTION_MONO} mb-2`}>Enterprise apps we test</div>
         <div className="flex flex-wrap gap-1.5">
           {menu.erp.map((app) => (
             <a
