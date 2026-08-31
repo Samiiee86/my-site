@@ -86,10 +86,13 @@ export const NAV: NavEntry[] = [
     kane: {
       caption: "AI writes it. Kane proves it.",
       items: [
-        { name: "KaneAI", desc: "The testing agent. Licensed per agent." },
+        {
+          name: "KaneAI",
+          desc: "World's first end-to-end software testing agent",
+        },
         {
           name: "Kane CLI",
-          desc: "Free terminal companion to KaneAI.",
+          desc: "Browser automation validation for developers, QA & AI coding agents",
           badge: "New",
         },
       ],
@@ -97,12 +100,18 @@ export const NAV: NavEntry[] = [
     agentTest: {
       caption: "Test the AI agents you build",
       items: [
-        { name: "Conversational agents", desc: "Chat, voice and phone" },
-        { name: "Video agents", desc: "Screen-share and video sessions" },
+        {
+          name: "Conversational agents",
+          desc: "Test AI agents, including chatbots and voice assistants",
+        },
+        {
+          name: "Video agents",
+          desc: "Test your video agent the way a real user would",
+        },
         { name: "IVR & voice", desc: "Phone trees and voice journeys" },
         {
           name: "Agent Assurance",
-          desc: "Grades every criterion against observed evidence",
+          desc: "Multi-agent testing platform of AI agents",
           badge: "Waitlist",
         },
       ],
@@ -110,20 +119,41 @@ export const NAV: NavEntry[] = [
     cloud: {
       caption: "Run tests on cloud",
       items: [
-        { name: "Automation", desc: "Selenium, Cypress and Playwright" },
-        { name: "HyperExecute", desc: "Fastest execution grid" },
+        {
+          name: "Automation",
+          desc: "Run automation tests on a scalable cloud grid",
+        },
+        {
+          name: "HyperExecute",
+          desc: "Blazing fast AI-native automation testing cloud",
+        },
         { name: "Live Testing", desc: "Manual cross-browser sessions" },
-        { name: "Real Device Cloud", desc: "Web and mobile on real devices" },
-        { name: "App Automation", desc: "Native iOS and Android automation" },
-        { name: "Browser Cloud", desc: "Infrastructure for AI agents" },
+        {
+          name: "Real Device Cloud",
+          desc: "Test web and mobile applications on real devices",
+        },
+        {
+          name: "App Automation",
+          desc: "End-to-end AI-native app automation testing cloud",
+        },
+        {
+          name: "Browser Cloud",
+          desc: "Scalable browser infrastructure for AI agents",
+        },
       ],
     },
     quality: {
       caption: "Quality and management",
       items: [
-        { name: "Test Manager", desc: "Cases, runs and coverage" },
-        { name: "SmartUI", desc: "Visual regression testing" },
-        { name: "Accessibility Testing", desc: "WCAG audits, automated" },
+        { name: "Test Manager", desc: "Intelligent AI for test management" },
+        {
+          name: "SmartUI",
+          desc: "AI-native automated visual UI testing on cloud",
+        },
+        {
+          name: "Accessibility Testing",
+          desc: "Test the accessibility of websites and web apps",
+        },
         { name: "Performance Testing", desc: "JMeter load testing" },
       ],
     },
@@ -262,7 +292,7 @@ export const NAV: NavEntry[] = [
     cards: [
       {
         name: "Introducing Agent Assurance",
-        desc: "Derives your suite and grades it against observed evidence.",
+        desc: "Multi-agent testing platform of AI agents.",
         image: "/img/kane-cli-card.png",
         cta: "Join the waitlist",
       },
