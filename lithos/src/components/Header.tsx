@@ -87,7 +87,7 @@ function Rail({
   return (
     <div
       style={{ width }}
-      className="flex flex-none flex-col gap-[34px] border-l border-[#E7E6DF] bg-white pb-[22px] pl-8 pr-6 pt-[26px]"
+      className="flex flex-none flex-col gap-[34px] bg-white pb-[22px] pl-8 pr-6 pt-[26px]"
     >
       {blocks?.map((block) => (
         <div key={block.caption}>
