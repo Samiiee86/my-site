@@ -111,7 +111,7 @@ function Rail({
                 <img
                   src={card.image}
                   alt=""
-                  className="aspect-[4/3] w-[192px] bg-[#F5F4F0] object-cover"
+                  className="h-auto w-[192px] bg-[#F5F4F0]"
                   loading="lazy"
                 />
                 <span className="min-w-0">
