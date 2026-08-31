@@ -174,9 +174,9 @@ export const NAV: NavEntry[] = [
     kind: "panel",
     key: "resources",
     label: "Resources",
-    width: 919,
+    width: 962,
     cols: "190px 190px 190px",
-    gap: "28px",
+    gap: "48px",
     railWidth: 232,
     groups: [
       {
@@ -184,6 +184,9 @@ export const NAV: NavEntry[] = [
         items: [
           { name: "Documentation" },
           { name: "API reference" },
+          { name: "Integrations" },
+          { name: "MCP Server" },
+          { name: "Accessibility DevTools" },
           { name: "Languages & frameworks" },
           { name: "GitHub repositories" },
           { name: "Status page" },
@@ -228,9 +231,9 @@ export const NAV: NavEntry[] = [
     kind: "panel",
     key: "agents",
     label: "AI Agents",
-    width: 925,
+    width: 945,
     cols: "224px 224px",
-    gap: "28px",
+    gap: "48px",
     railWidth: 376,
     groups: [
       {
