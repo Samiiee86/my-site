@@ -23,8 +23,10 @@ export default function App() {
         <CursorPill />
         <Header />
 
-        {/* navbar + hero fill the first screen */}
-        <div className="flex h-[calc(100vh-104px)] flex-col overflow-hidden">
+        {/* The hero fills the first screen but is never clipped: the section
+            grows with its content, so the dashboard (image today, video later)
+            always ends inside it instead of being cut by the fold. */}
+        <div className="flex min-h-[calc(100vh-104px)] flex-col">
           <Hero />
         </div>
 

@@ -75,10 +75,14 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex flex-1 flex-col items-center overflow-hidden"
+      className="relative flex flex-1 flex-col items-center overflow-hidden pb-16 md:pb-24"
     >
       <LoopingVideo />
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-background/70 via-background/40 to-background/80" />
+      {/* readability wash up top... */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-background/70 via-background/30 to-transparent" />
+      {/* ...and a dissolve into the page background below, so the video never
+          hard-stops against the next section */}
+      <div className="absolute inset-x-0 bottom-0 z-0 h-[45%] bg-gradient-to-b from-transparent via-background/60 to-background" />
 
       <div className="relative z-10 flex w-full flex-col items-center px-6 pt-[72px]">
         <motion.h1
