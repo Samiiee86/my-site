@@ -1,5 +1,4 @@
 import { MotionConfig } from "motion/react";
-import useSmoothScroll from "./hooks/useSmoothScroll";
 import CursorPill from "./components/CursorPill";
 import ScrollProgress from "./components/ScrollProgress";
 import GuideLines from "./components/GuideLines";
@@ -17,8 +16,6 @@ import Enterprise from "./sections/Enterprise";
 import Footer from "./sections/Footer";
 
 export default function App() {
-  useSmoothScroll();
-
   return (
     <MotionConfig reducedMotion="user">
       <div className="relative min-h-screen bg-background font-body">

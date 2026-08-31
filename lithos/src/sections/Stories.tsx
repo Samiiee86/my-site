@@ -142,17 +142,21 @@ export default function Stories() {
           </div>
 
           {/* supporting cases */}
-          <div className="grid border-t border-border-muted lg:grid-cols-[1fr_1fr_1.6fr]">
-            {storiesGrid.cells.map((cell) => (
+          <div className="grid border-t border-border-muted lg:grid-cols-2">
+            {storiesGrid.cells.map((cell, i) => (
               <div
                 key={cell.brand}
                 data-cursor="Case study"
-                className="flex flex-col justify-between gap-12 border-b border-border-muted p-6 transition-colors duration-500 hover:bg-secondary/40 lg:border-b-0 lg:border-r lg:border-border-muted"
+                className={`flex flex-col justify-between gap-12 border-b border-border-muted p-6 transition-colors duration-500 hover:bg-secondary/40 lg:border-b-0 ${
+                  i === 0 ? "lg:border-r lg:border-border-muted" : ""
+                }`}
               >
                 <img
                   src={cell.brand}
                   alt=""
-                  className="h-8 w-auto max-w-[170px] object-contain object-left"
+                  className={`w-auto max-w-[190px] object-contain object-left ${
+                    /transavia/.test(cell.brand) ? "h-11" : "h-8"
+                  }`}
                 />
                 <div>
                   <p className="pixel text-[40px] leading-none tracking-tight">
@@ -164,10 +168,14 @@ export default function Stories() {
                 </div>
               </div>
             ))}
+          </div>
 
+          {/* the wide case runs the full width of the box, same as the
+              headline row above */}
+          <div className="border-t border-border-muted">
             <div
               data-cursor="Read case study"
-              className="group relative min-h-[320px] overflow-hidden"
+              className="group relative min-h-[340px] overflow-hidden"
             >
               <img
                 src={wide.image}
