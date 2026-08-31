@@ -78,7 +78,7 @@ export default function Stories() {
         <div className="overflow-hidden  border border-border-muted bg-surface">
           {/* headline case */}
           <div className="grid lg:grid-cols-[1.35fr_1fr]">
-            <div className="p-8 lg:border-r lg:border-border-muted">
+            <div className="p-8">
               <div
                 data-cursor="Play video"
                 role="button"
@@ -142,14 +142,12 @@ export default function Stories() {
           </div>
 
           {/* supporting cases */}
-          <div className="grid border-t border-border-muted lg:grid-cols-2">
-            {storiesGrid.cells.map((cell, i) => (
+          <div className="grid border-t border-border-muted lg:grid-cols-[1fr_1fr_1.6fr]">
+            {storiesGrid.cells.map((cell) => (
               <div
                 key={cell.brand}
                 data-cursor="Case study"
-                className={`flex flex-col justify-between gap-12 border-b border-border-muted p-6 transition-colors duration-500 hover:bg-secondary/40 lg:border-b-0 ${
-                  i === 0 ? "lg:border-r lg:border-border-muted" : ""
-                }`}
+                className="flex flex-col justify-between gap-12 border-b border-border-muted p-6 transition-colors duration-500 hover:bg-secondary/40 lg:border-b-0 lg:border-r lg:border-border-muted"
               >
                 <img
                   src={cell.brand}
@@ -168,47 +166,44 @@ export default function Stories() {
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* the wide case runs the full width of the box, same as the
-              headline row above */}
-          <div className="border-t border-border-muted">
-            <div
-              data-cursor="Read case study"
-              className="group relative min-h-[340px] overflow-hidden"
-            >
-              <img
-                src={wide.image}
-                alt=""
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                loading="lazy"
-              />
+            <div className="p-6">
               <div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(54deg, rgba(18,18,18,0.78) 32%, rgba(18,18,18,0) 72%)",
-                }}
-              />
-              <div className="relative flex h-full flex-col justify-between p-8">
+                data-cursor="Read case study"
+                className="group relative h-full min-h-[300px] overflow-hidden"
+              >
                 <img
-                  src={wide.brand}
-                  alt="Best Egg"
-                  className="h-9 w-auto max-w-[157px] object-contain object-left"
+                  src={wide.image}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  loading="lazy"
                 />
-                <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-                  <div>
-                    <p className="pixel text-[44px] leading-none tracking-tight text-white">
-                      {wide.stat}
-                    </p>
-                    <p className="mt-3 max-w-[260px] text-[15px] capitalize leading-snug text-white/90">
-                      {wide.desc}
-                    </p>
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(54deg, rgba(18,18,18,0.78) 32%, rgba(18,18,18,0) 72%)",
+                  }}
+                />
+                <div className="relative flex h-full flex-col justify-between p-8">
+                  <img
+                    src={wide.brand}
+                    alt="Best Egg"
+                    className="h-9 w-auto max-w-[157px] object-contain object-left"
+                  />
+                  <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+                    <div>
+                      <p className="pixel text-[44px] leading-none tracking-tight text-white">
+                        {wide.stat}
+                      </p>
+                      <p className="mt-3 max-w-[260px] text-[15px] capitalize leading-snug text-white/90">
+                        {wide.desc}
+                      </p>
+                    </div>
+                    <button className="flex shrink-0 items-center gap-2 rounded-[6px] border border-white bg-white/10 px-4 py-2 text-[13px] font-medium uppercase text-white backdrop-blur-md transition-colors hover:bg-white/20">
+                      {wide.action}
+                      <Play size={12} className="fill-white" />
+                    </button>
                   </div>
-                  <button className="flex shrink-0 items-center gap-2 rounded-[6px] border border-white bg-white/10 px-4 py-2 text-[13px] font-medium uppercase text-white backdrop-blur-md transition-colors hover:bg-white/20">
-                    {wide.action}
-                    <Play size={12} className="fill-white" />
-                  </button>
                 </div>
               </div>
             </div>
