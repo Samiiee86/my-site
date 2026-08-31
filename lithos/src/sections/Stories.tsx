@@ -85,7 +85,7 @@ export default function Stories() {
                 tabIndex={0}
                 onClick={() => setPlayerOpen(true)}
                 onKeyDown={(e) => e.key === "Enter" && setPlayerOpen(true)}
-                className="group relative h-[300px] cursor-pointer overflow-hidden md:h-[420px]"
+                className="group relative h-[240px] cursor-pointer overflow-hidden md:h-[310px]"
               >
                 <video
                   src={CUSTOMER_VIDEO}
@@ -147,7 +147,7 @@ export default function Stories() {
               <div
                 key={cell.brand}
                 data-cursor="Case study"
-                className="flex flex-col justify-between gap-12 border-b border-border-muted p-6 transition-colors duration-500 hover:bg-secondary/40 lg:border-b-0 lg:border-r lg:border-border-muted"
+                className="flex flex-col justify-between gap-8 border-b border-border-muted p-6 transition-colors duration-500 hover:bg-secondary/40 lg:border-b-0 lg:border-r lg:border-border-muted"
               >
                 <img
                   src={cell.brand}
@@ -169,7 +169,7 @@ export default function Stories() {
             <div className="p-6">
               <div
                 data-cursor="Read case study"
-                className="group relative h-full min-h-[300px] overflow-hidden"
+                className="group relative h-full min-h-[220px] overflow-hidden"
               >
                 <img
                   src={wide.image}
