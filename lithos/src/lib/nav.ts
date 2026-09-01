@@ -7,7 +7,7 @@ export type RichItem = {
   desc: string;
   badge?: string;
 };
-export type PlainItem = { name: string };
+export type PlainItem = { name: string; badge?: string };
 
 export type Group =
   | { caption: string; rich: true; items: RichItem[] }
@@ -82,9 +82,9 @@ export const NAV: NavEntry[] = [
     kind: "products",
     key: "products",
     label: "Products",
-    width: 1080,
+    width: 1010,
     kane: {
-      caption: "AI writes it. Kane proves it.",
+      caption: "End-to-End Agent Testing",
       items: [
         {
           name: "KaneAI",
@@ -100,61 +100,30 @@ export const NAV: NavEntry[] = [
     agentTest: {
       caption: "Test the AI agents you build",
       items: [
-        {
-          name: "Conversational agents",
-          desc: "Test AI agents, including chatbots and voice assistants",
-        },
-        {
-          name: "Video agents",
-          desc: "Test your video agent the way a real user would",
-        },
-        { name: "IVR & voice", desc: "Phone trees and voice journeys" },
-        {
-          name: "Agent Assurance",
-          desc: "Multi-agent testing platform of AI agents",
-          badge: "Waitlist",
-        },
+        { name: "Conversational agents" },
+        { name: "Video agents" },
+        { name: "IVR & voice" },
+        { name: "Agent Assurance", badge: "Waitlist" },
       ],
     },
     cloud: {
       caption: "Run tests on cloud",
       items: [
-        {
-          name: "Automation",
-          desc: "Run automation tests on a scalable cloud grid",
-        },
-        {
-          name: "HyperExecute",
-          desc: "Blazing fast AI-native automation testing cloud",
-        },
-        { name: "Live Testing", desc: "Manual cross-browser sessions" },
-        {
-          name: "Real Device Cloud",
-          desc: "Test web and mobile applications on real devices",
-        },
-        {
-          name: "App Automation",
-          desc: "End-to-end AI-native app automation testing cloud",
-        },
-        {
-          name: "Browser Cloud",
-          desc: "Scalable browser infrastructure for AI agents",
-        },
+        { name: "Automation" },
+        { name: "HyperExecute" },
+        { name: "Live Testing" },
+        { name: "Real Device Cloud" },
+        { name: "Native App Automation" },
+        { name: "Browser Cloud" },
       ],
     },
     quality: {
       caption: "Quality and management",
       items: [
-        { name: "Test Manager", desc: "Intelligent AI for test management" },
-        {
-          name: "SmartUI",
-          desc: "AI-native automated visual UI testing on cloud",
-        },
-        {
-          name: "Accessibility Testing",
-          desc: "Test the accessibility of websites and web apps",
-        },
-        { name: "Performance Testing", desc: "JMeter load testing" },
+        { name: "Test Management" },
+        { name: "SmartUI" },
+        { name: "Accessibility Testing" },
+        { name: "Performance Testing" },
       ],
     },
   },
@@ -162,11 +131,10 @@ export const NAV: NavEntry[] = [
     kind: "grid",
     key: "solutions",
     label: "Solutions",
-    width: 1080,
+    width: 1046,
     useCases: [
       "Cross browser testing",
       "Mobile app testing",
-      "Web application testing",
       "Responsive testing",
       "API testing",
       "Functional testing",
@@ -179,6 +147,8 @@ export const NAV: NavEntry[] = [
       "Geolocation testing",
       "Localization testing",
       "Local page testing",
+      "Accessibility testing",
+      "IVR testing",
     ],
     teamSize: [
       "Startups",
@@ -189,25 +159,16 @@ export const NAV: NavEntry[] = [
     ],
     quote: { title: "Not sure which plan?", cta: "Get a quote" },
     aiBuilds: ["Vibe coding", "Lovable", "Bolt", "v0", "Cursor", "Replit"],
-    erp: [
-      "Salesforce",
-      "SAP",
-      "Oracle",
-      "Workday",
-      "ServiceNow",
-      "NetSuite",
-      "Dynamics 365",
-      "Coupa",
-    ],
+    erp: ["Salesforce", "SAP", "Oracle", "Workday", "ServiceNow"],
   },
   {
     kind: "panel",
     key: "resources",
     label: "Resources",
-    width: 962,
+    width: 982,
     cols: "190px 190px 190px",
     gap: "48px",
-    railWidth: 232,
+    railWidth: 260,
     groups: [
       {
         caption: "Developers",
@@ -215,7 +176,7 @@ export const NAV: NavEntry[] = [
           { name: "Documentation" },
           { name: "API reference" },
           { name: "Integrations" },
-          { name: "MCP Server" },
+          { name: "MCP Server", badge: "Beta" },
           { name: "Accessibility DevTools" },
           { name: "Languages & frameworks" },
           { name: "GitHub repositories" },
@@ -230,7 +191,6 @@ export const NAV: NavEntry[] = [
           { name: "Customer stories" },
           { name: "Webinars" },
           { name: "Certifications" },
-          { name: "Testing glossary" },
         ],
       },
       {
@@ -241,6 +201,7 @@ export const NAV: NavEntry[] = [
           { name: "Partners" },
           { name: "Community" },
           { name: "Press" },
+          { name: "QA job board" },
           { name: "LambdaTest is TestMu AI" },
         ],
       },
@@ -248,47 +209,9 @@ export const NAV: NavEntry[] = [
     rail: [
       {
         caption: "What's new",
-        items: [
-          "TestMu Conf /26",
-          "Live webinars this week",
-          "Open QA job board",
-        ],
+        items: ["TestMu Conf /26", "Live webinars this week"],
       },
     ],
-  },
-  {
-    kind: "panel",
-    key: "agents",
-    label: "AI Agents",
-    width: 869,
-    cols: "224px 224px",
-    gap: "48px",
-    railWidth: 300,
-    groups: [
-      {
-        caption: "Automate with agents",
-        items: [
-          { name: "AI agent testing" },
-          { name: "AI test authoring" },
-          { name: "AI visual testing" },
-          { name: "AI test planning" },
-          { name: "AI root cause analysis" },
-          { name: "AI accessibility testing" },
-        ],
-      },
-      {
-        caption: "Agent operations",
-        items: [
-          { name: "AI test orchestration" },
-          { name: "AI test insights" },
-          { name: "AI flaky test detection" },
-          { name: "AI regression analysis" },
-          { name: "AI coverage analysis" },
-          { name: "AI performance analysis" },
-        ],
-      },
-    ],
-    cardsCaption: "New product",
     cards: [
       {
         name: "Introducing Agent Assurance",
@@ -298,5 +221,6 @@ export const NAV: NavEntry[] = [
       },
     ],
   },
+  { kind: "plain", key: "customers", label: "Customers" },
   { kind: "plain", key: "pricing", label: "Pricing" },
 ];

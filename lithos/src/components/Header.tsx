@@ -66,6 +66,11 @@ function GroupColumn({ group }: { group: Group }) {
           : group.items.map((item) => (
               <a key={item.name} href="#top" className={ROW_PLAIN}>
                 {item.name}
+                {item.badge && (
+                  <span className="ml-2 border border-[#1742DF] px-[6px] py-px font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] text-[#1742DF]">
+                    {item.badge}
+                  </span>
+                )}
               </a>
             ))}
       </div>
@@ -87,7 +92,7 @@ function Rail({
   return (
     <div
       style={{ width }}
-      className="flex flex-none flex-col gap-[34px] bg-white pb-[22px] pl-8 pr-6 pt-[26px]"
+      className="flex flex-none flex-col gap-[30px] border-l border-[#E7E6DF] bg-white pb-[22px] pl-8 pr-6 pt-[26px]"
     >
       {blocks?.map((block) => (
         <div key={block.caption}>
@@ -104,7 +109,9 @@ function Rail({
 
       {cards && cards.length > 0 && (
         <div>
-          <div className={`${CAPTION_MONO} mb-2`}>{cardsCaption}</div>
+          {cardsCaption && (
+            <div className={`${CAPTION_MONO} mb-2`}>{cardsCaption}</div>
+          )}
           <div className="flex flex-col gap-[14px]">
             {cards.map((card) => (
               <a key={card.name} href="#top" className="flex flex-col gap-2.5">
@@ -159,13 +166,19 @@ function ColumnsPanel({ menu }: { menu: PanelMenu }) {
   return (
     <PanelShell width={menu.width}>
       <div className="flex">
-        <div
-          className="grid flex-none pb-[22px] pl-7 pr-8 pt-[26px]"
-          style={{ gridTemplateColumns: menu.cols, columnGap: menu.gap }}
-        >
-          {menu.groups.map((group) => (
-            <GroupColumn key={group.caption} group={group} />
-          ))}
+        <div className="flex flex-none pb-[22px] pl-7 pt-[26px]">
+          {menu.groups.map((group, i) => {
+            const w = parseInt(menu.cols.split(" ")[i] ?? "190", 10);
+            return (
+              <div
+                key={group.caption}
+                style={{ width: w + (i === 0 ? 24 : 48) }}
+                className={i === 0 ? "pr-6" : "border-l border-[#E7E6DF] px-6"}
+              >
+                <GroupColumn group={group} />
+              </div>
+            );
+          })}
         </div>
         <Rail
           blocks={menu.rail}
@@ -207,16 +220,16 @@ function DescRow({ item }: { item: DescItem }) {
 function ProductsPanel({ menu }: { menu: ProductsMenu }) {
   return (
     <PanelShell width={menu.width}>
-      <div className="flex gap-12 pb-[24px] pl-7 pr-8 pt-[26px]">
+      <div className="flex pb-[24px] pl-7 pr-8 pt-[26px]">
         {/* Kane, then the agents you build */}
-        <div className="w-[330px] flex-none">
+        <div className="w-[354px] flex-none pr-6">
           <div className={`${CAPTION_MONO} mb-2`}>{menu.kane.caption}</div>
-          <div className="flex flex-col gap-1">
+          <div className="border border-[#E7E6DF] bg-[#FAFAF8] px-3 py-2">
             {menu.kane.items.map((item) => (
               <DescRow key={item.name} item={item} />
             ))}
           </div>
-          <div className="my-5 border-t border-dashed border-[#D3D2CD]" />
+          <div className="my-5 border-t border-[#E7E6DF]" />
           <div className={`${CAPTION_MONO} mb-2`}>{menu.agentTest.caption}</div>
           <div className="flex flex-col gap-1">
             {menu.agentTest.items.map((item) => (
@@ -225,7 +238,7 @@ function ProductsPanel({ menu }: { menu: ProductsMenu }) {
           </div>
         </div>
 
-        <div className="w-[270px] flex-none">
+        <div className="w-[318px] flex-none border-l border-[#E7E6DF] px-6">
           <div className={`${CAPTION_MONO} mb-2`}>{menu.cloud.caption}</div>
           <div className="flex flex-col gap-1">
             {menu.cloud.items.map((item) => (
@@ -234,7 +247,7 @@ function ProductsPanel({ menu }: { menu: ProductsMenu }) {
           </div>
         </div>
 
-        <div className="w-[250px] flex-none">
+        <div className="w-[274px] flex-none border-l border-[#E7E6DF] pl-6">
           <div className={`${CAPTION_MONO} mb-2`}>{menu.quality.caption}</div>
           <div className="flex flex-col gap-1">
             {menu.quality.items.map((item) => (
@@ -250,8 +263,8 @@ function ProductsPanel({ menu }: { menu: ProductsMenu }) {
 function SolutionsPanel({ menu }: { menu: GridMenu }) {
   return (
     <PanelShell width={menu.width}>
-      <div className="flex gap-12 pb-[24px] pl-7 pr-8 pt-[26px]">
-        <div className="flex-none">
+      <div className="flex pb-[24px] pl-7 pr-8 pt-[26px]">
+        <div className="flex-none pr-6">
           <div className={`${CAPTION_MONO} mb-2`}>By use case</div>
           <div className="grid auto-rows-[34px] grid-cols-[218px_218px] gap-x-8 [grid-auto-flow:column] [grid-template-rows:repeat(8,34px)]">
             {menu.useCases.map((useCase) => (
@@ -262,7 +275,7 @@ function SolutionsPanel({ menu }: { menu: GridMenu }) {
           </div>
         </div>
 
-        <div className="w-[248px] flex-none">
+        <div className="w-[296px] flex-none border-l border-[#E7E6DF] px-6">
           <div className={`${CAPTION_MONO} mb-2`}>By team size</div>
           <div className="flex flex-col">
             {menu.teamSize.map((size) => (
@@ -271,7 +284,7 @@ function SolutionsPanel({ menu }: { menu: GridMenu }) {
               </a>
             ))}
           </div>
-          <div className="mt-6">
+          <div className="mt-6 bg-[#EEF2FF] px-4 py-3.5">
             <span className="block text-[15px] font-medium leading-5 text-[#121212]">
               {menu.quote.title}
             </span>
@@ -285,7 +298,7 @@ function SolutionsPanel({ menu }: { menu: GridMenu }) {
           </div>
         </div>
 
-        <div className="w-[170px] flex-none">
+        <div className="w-[194px] flex-none border-l border-[#E7E6DF] pl-6">
           <div className={`${CAPTION_MONO} mb-2`}>Test what AI builds</div>
           <div className="flex flex-col">
             {menu.aiBuilds.map((tool) => (
