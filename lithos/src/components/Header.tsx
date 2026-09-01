@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   NAV,
   announcement,
@@ -151,13 +152,8 @@ function PanelShell({
   children: React.ReactNode;
 }) {
   return (
-    <div className="absolute inset-x-0 top-full flex justify-center px-7 pt-1.5">
-      <div
-        style={{ width: "100%", maxWidth: width }}
-        className="panel-in overflow-hidden border border-[#E7E6DF] bg-white shadow-[0_24px_60px_rgba(18,18,18,0.14)]"
-      >
-        {children}
-      </div>
+    <div style={{ width }} className="max-w-full">
+      {children}
     </div>
   );
 }
@@ -398,7 +394,7 @@ export default function Header() {
                         : item.key,
                   )
                 }
-                className={`cursor-pointer whitespace-nowrap rounded-[8px] px-3 py-2 text-[15px] font-medium text-[#121212] transition-colors ${
+                className={`cursor-pointer whitespace-nowrap rounded-[8px] px-3 py-2 text-[15px] font-medium text-[#121212] transition-colors hover:bg-[#E7E6DF] ${
                   open === item.key ? "bg-[#E7E6DF]" : "bg-transparent"
                 }`}
               >
@@ -442,19 +438,36 @@ export default function Header() {
           </div>
         </div>
 
-        {active?.kind === "products" && (
-          <div id={`panel-${active.key}`}>
-            <ProductsPanel menu={active} />
-          </div>
-        )}
-        {active?.kind === "panel" && (
-          <div id={`panel-${active.key}`}>
-            <ColumnsPanel menu={active} />
-          </div>
-        )}
-        {active?.kind === "grid" && (
-          <div id={`panel-${active.key}`}>
-            <SolutionsPanel menu={active} />
+        {active && active.kind !== "plain" && (
+          <div
+            id={`panel-${active.key}`}
+            className="absolute inset-x-0 top-full pt-1.5"
+          >
+            <div className="mx-auto w-full max-w-[1280px] px-7">
+              <motion.div
+                layout
+                transition={{
+                  layout: { duration: 0.32, ease: [0.16, 1, 0.3, 1] },
+                }}
+                className="panel-in w-fit max-w-full overflow-hidden border border-[#E7E6DF] bg-white shadow-[0_24px_60px_rgba(18,18,18,0.14)]"
+              >
+                <AnimatePresence mode="popLayout" initial={false}>
+                  <motion.div
+                    key={active.key}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.16, ease: "easeOut" }}
+                  >
+                    {active.kind === "products" && (
+                      <ProductsPanel menu={active} />
+                    )}
+                    {active.kind === "panel" && <ColumnsPanel menu={active} />}
+                    {active.kind === "grid" && <SolutionsPanel menu={active} />}
+                  </motion.div>
+                </AnimatePresence>
+              </motion.div>
+            </div>
           </div>
         )}
 

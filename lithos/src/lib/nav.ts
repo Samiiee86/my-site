@@ -176,7 +176,7 @@ export const NAV: NavEntry[] = [
           { name: "Documentation" },
           { name: "API reference" },
           { name: "Integrations" },
-          { name: "MCP Server", badge: "Beta" },
+          { name: "MCP Server", badge: "New" },
           { name: "Accessibility DevTools" },
           { name: "Languages & frameworks" },
           { name: "GitHub repositories" },
@@ -206,12 +206,7 @@ export const NAV: NavEntry[] = [
         ],
       },
     ],
-    rail: [
-      {
-        caption: "What's new",
-        items: ["TestMu Conf /26", "Live webinars this week"],
-      },
-    ],
+    cardsCaption: "What's new",
     cards: [
       {
         name: "Introducing Agent Assurance",
