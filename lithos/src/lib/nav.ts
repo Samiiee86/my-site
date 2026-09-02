@@ -55,7 +55,7 @@ export type GridMenu = {
   label: string;
   width: number;
   useCases: string[];
-  teamSize: string[];
+  services: { caption: string; items: string[] };
   quote: { title: string; cta: string };
   aiBuilds: string[];
   erp: string[];
@@ -92,7 +92,7 @@ export const NAV: NavEntry[] = [
         },
         {
           name: "Kane CLI",
-          desc: "Browser automation validation for developers, QA & AI coding agents",
+          desc: "Automate E2E flows on local browser with natural language",
           badge: "New",
         },
       ],
@@ -103,7 +103,7 @@ export const NAV: NavEntry[] = [
         { name: "Conversational agents" },
         { name: "Video agents" },
         { name: "IVR & voice" },
-        { name: "Agent Assurance", badge: "Waitlist" },
+        { name: "Agent Assurance", badge: "Beta" },
       ],
     },
     cloud: {
@@ -150,14 +150,11 @@ export const NAV: NavEntry[] = [
       "Accessibility testing",
       "IVR testing",
     ],
-    teamSize: [
-      "Startups",
-      "Growing teams",
-      "Enterprise",
-      "Public sector",
-      "Professional services",
-    ],
-    quote: { title: "Not sure which plan?", cta: "Get a quote" },
+    services: {
+      caption: "Testing services",
+      items: ["TestMu AI Professional services"],
+    },
+    quote: { title: "Not sure which plan to choose?", cta: "Book a Demo" },
     aiBuilds: ["Vibe coding", "Lovable", "Bolt", "v0", "Cursor", "Replit"],
     erp: ["Salesforce", "SAP", "Oracle", "Workday", "ServiceNow"],
   },
@@ -200,7 +197,7 @@ export const NAV: NavEntry[] = [
           { name: "Careers" },
           { name: "Partners" },
           { name: "Community" },
-          { name: "Press" },
+          { name: "Newsroom" },
           { name: "QA job board" },
           { name: "LambdaTest is TestMu AI" },
         ],
@@ -209,7 +206,7 @@ export const NAV: NavEntry[] = [
     cardsCaption: "What's new",
     cards: [
       {
-        name: "Introducing Agent Assurance",
+        name: "Agent Assurance",
         desc: "Multi-agent testing platform of AI agents.",
         image: "/img/agent-assurance-card.png",
         cta: "Join the waitlist",
@@ -217,5 +214,6 @@ export const NAV: NavEntry[] = [
     ],
   },
   { kind: "plain", key: "customers", label: "Customers" },
+  { kind: "plain", key: "enterprise", label: "Enterprise" },
   { kind: "plain", key: "pricing", label: "Pricing" },
 ];

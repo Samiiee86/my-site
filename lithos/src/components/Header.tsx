@@ -44,7 +44,7 @@ function RichRow({ item }: { item: RichItem }) {
             {item.name}
           </span>
           {item.badge && (
-            <span className="bg-[#EEF2FF] px-2 py-px text-[12px] font-medium tracking-[0.02em] text-[#1742DF]">
+            <span className="bg-[#E7E6DF] px-2 py-px font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[#121212]">
               {item.badge}
             </span>
           )}
@@ -68,7 +68,7 @@ function GroupColumn({ group }: { group: Group }) {
               <a key={item.name} href="#top" className={ROW_PLAIN}>
                 {item.name}
                 {item.badge && (
-                  <span className="ml-2 border border-[#1742DF] px-[6px] py-px font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] text-[#1742DF]">
+                  <span className="ml-2 bg-[#E7E6DF] px-[6px] py-px font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] text-[#121212]">
                     {item.badge}
                   </span>
                 )}
@@ -130,7 +130,7 @@ function Rail({
                     {card.desc}
                   </span>
                   {card.cta && (
-                    <span className="mt-2 inline-flex items-center gap-1 text-[13px] font-medium text-[#1742DF]">
+                    <span className="mt-2.5 inline-flex items-center gap-1.5 self-start border-b border-[#121212] pb-0.5 text-[13px] font-medium text-[#121212]">
                       {card.cta} <span aria-hidden>→</span>
                     </span>
                   )}
@@ -199,7 +199,7 @@ function DescRow({ item }: { item: DescItem }) {
           {item.name}
         </span>
         {item.badge && (
-          <span className="border border-[#1742DF] px-[6px] py-px font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] text-[#1742DF]">
+          <span className="bg-[#E7E6DF] px-[6px] py-px font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] text-[#121212]">
             {item.badge}
           </span>
         )}
@@ -262,7 +262,7 @@ function SolutionsPanel({ menu }: { menu: GridMenu }) {
       <div className="flex pb-[24px] pl-7 pr-8 pt-[26px]">
         <div className="flex-none pr-6">
           <div className={`${CAPTION_MONO} mb-2`}>By use case</div>
-          <div className="grid auto-rows-[34px] grid-cols-[218px_218px] gap-x-8 [grid-auto-flow:column] [grid-template-rows:repeat(8,34px)]">
+          <div className="grid auto-rows-[34px] grid-cols-[192px_192px_192px] gap-x-7 [grid-auto-flow:column] [grid-template-rows:repeat(6,34px)]">
             {menu.useCases.map((useCase) => (
               <a key={useCase} href="#top" className={ROW_PLAIN}>
                 {useCase}
@@ -271,53 +271,59 @@ function SolutionsPanel({ menu }: { menu: GridMenu }) {
           </div>
         </div>
 
-        <div className="w-[296px] flex-none border-l border-[#E7E6DF] px-6">
-          <div className={`${CAPTION_MONO} mb-2`}>By team size</div>
+        <div className="flex w-[300px] flex-none flex-col border-l border-[#E7E6DF] pl-6">
+          <div className={`${CAPTION_MONO} mb-2`}>{menu.services.caption}</div>
           <div className="flex flex-col">
-            {menu.teamSize.map((size) => (
-              <a key={size} href="#top" className={ROW_PLAIN}>
-                {size}
+            {menu.services.items.map((svc) => (
+              <a key={svc} href="#top" className={ROW_PLAIN}>
+                {svc}
               </a>
             ))}
           </div>
-          <div className="mt-6 bg-[#EEF2FF] px-4 py-3.5">
+          <div className="mt-auto bg-[#EEF2FF] px-4 py-3.5">
             <span className="block text-[15px] font-medium leading-5 text-[#121212]">
               {menu.quote.title}
             </span>
             <a
               href="#top"
-              className="mt-1.5 inline-flex items-center gap-1.5 text-[14px] font-medium text-[#1742DF] transition-colors hover:text-[#1433A4]"
+              className="mt-2 inline-flex items-center gap-1.5 border-b border-[#121212] pb-0.5 text-[14px] font-medium text-[#121212]"
             >
               {menu.quote.cta}
               <span aria-hidden>→</span>
             </a>
           </div>
         </div>
+      </div>
 
-        <div className="w-[194px] flex-none border-l border-[#E7E6DF] pl-6">
-          <div className={`${CAPTION_MONO} mb-2`}>Test what AI builds</div>
-          <div className="flex flex-col">
-            {menu.aiBuilds.map((tool) => (
-              <a key={tool} href="#top" className={ROW_PLAIN}>
-                {tool}
+      {/* bottom strip: enterprise apps beside what AI builds */}
+      <div className="flex border-t border-[#E7E6DF]">
+        <div className="flex-1 py-[18px] pl-7 pr-6 pb-[22px]">
+          <div className={`${CAPTION_MONO} mb-2`}>Enterprise apps we test</div>
+          <div className="flex flex-wrap gap-1.5">
+            {menu.erp.map((app) => (
+              <a
+                key={app}
+                href="#top"
+                className="flex-none whitespace-nowrap border border-[#E7E6DF] bg-[#FAFAF8] px-[11px] py-1 text-[13px] font-medium leading-[18px] text-[#121212] transition-colors hover:border-[#121212]"
+              >
+                {app}
               </a>
             ))}
           </div>
         </div>
-      </div>
-
-      <div className="border-t border-[#E7E6DF] px-7 pb-[22px] pt-[18px]">
-        <div className={`${CAPTION_MONO} mb-2`}>Enterprise apps we test</div>
-        <div className="flex flex-wrap gap-1.5">
-          {menu.erp.map((app) => (
-            <a
-              key={app}
-              href="#top"
-              className="flex-none whitespace-nowrap border border-[#E7E6DF] bg-[#FAFAF8] px-[11px] py-1 text-[13px] font-medium leading-[18px] text-[#121212] transition-colors hover:border-[#121212]"
-            >
-              {app}
-            </a>
-          ))}
+        <div className="flex-none border-l border-[#E7E6DF] py-[18px] pl-6 pr-8 pb-[22px]">
+          <div className={`${CAPTION_MONO} mb-2`}>Test what AI builds</div>
+          <div className="flex items-center gap-5">
+            {menu.aiBuilds.map((tool) => (
+              <a
+                key={tool}
+                href="#top"
+                className="whitespace-nowrap text-[15px] font-medium text-[#121212] transition-colors hover:text-[#4D4D4D]"
+              >
+                {tool}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </PanelShell>
@@ -496,7 +502,10 @@ export default function Header() {
                   });
                 } else if (item.kind === "grid") {
                   lists.push({ caption: "By use case", items: item.useCases });
-                  lists.push({ caption: "By team size", items: item.teamSize });
+                  lists.push({
+                    caption: item.services.caption,
+                    items: item.services.items,
+                  });
                   lists.push({
                     caption: "Test what AI builds",
                     items: item.aiBuilds,
