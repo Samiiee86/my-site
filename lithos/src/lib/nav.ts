@@ -213,7 +213,7 @@ export const NAV: NavEntry[] = [
       },
     ],
   },
-  { kind: "plain", key: "customers", label: "Customers" },
   { kind: "plain", key: "enterprise", label: "Enterprise" },
+  { kind: "plain", key: "customers", label: "Customers" },
   { kind: "plain", key: "pricing", label: "Pricing" },
 ];
